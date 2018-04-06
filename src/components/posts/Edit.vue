@@ -170,7 +170,7 @@ export default {
           });
       },
       delete_post() {
-          this.axios.post(this.api + '/blog/delete/' + this.$route.paramd.is).then((res) => {
+          this.axios.post(this.api + '/blog/delete/' + this.$route.params.id).then((res) => {
               if (res.data.error == 0)
               {
                   this.$router.push('/posts')

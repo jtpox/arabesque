@@ -14,6 +14,7 @@
                             <button type="button" class="btn btn-primary" v-on:click.prevent="page.hidden = !page.hidden">
                                 <i class="fas" v-bind:class="{ 'fa-eye': !page.hidden, 'fa-eye-slash': page.hidden }"></i> Page {{ (page.hidden) ? 'Hidden' : 'Viewable' }}
                             </button>
+                            <button type="button" class="btn btn-danger" v-on:click.prevent="deletePage()"><i class="far fa-trash-alt"></i> Delete</button>
                             <button type="button" class="btn btn-success" v-on:click.prevent="update()"><i class="far fa-thumbs-up" v-show="alerts.success"></i> Update</button>
                         </span>
                     </div>
@@ -145,6 +146,14 @@ export default {
               {
                   this.alerts.success = true
               }
+          })
+          .catch((err) => {
+              console.log(err)
+          })
+      },
+      deletePage() {
+          this.axios.post(this.api + '/pages/delete/' + this.$route.params.id).then((res) => {
+              this.$router.push('/pages')
           })
           .catch((err) => {
               console.log(err)
