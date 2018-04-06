@@ -1,0 +1,210 @@
+/*
+ * Theme: Karma
+ */
+
+@import "functions";
+@import "variables";
+@import url('bootstrap.css');
+@import url('fontawesome-all.min.css');
+
+@import url('https://fonts.googleapis.com/css?family=Merriweather:300,400,700|Raleway:300,400');
+
+html, body {
+    height: 100%;
+}
+
+h1, h2, h3, h4, h5 {
+    /* Font */
+    font-family: 'Raleway', sans-serif;
+    font-weight: 300;
+}
+
+a, a:link, a:visited, a:hover {
+    /* Transition */
+    transition: 0.2s ease-in-out; 
+}
+
+.wrapper,  #app {
+    height: 100%;
+}
+
+.card {
+    /* Margin & Padding */
+    margin-bottom: 20px;
+}
+
+/*
+ * Main Navigation
+ */
+.wrapper .main-nav {
+    background-color: $gray-900;
+    overflow-y: auto;
+    /* Font */
+    color: $white;
+}
+
+.main-nav .logo {
+    background-color: $black;
+    overflow: auto;
+    /* Font */
+    font-family: 'Raleway', sans-serif;
+    font-weight: 300;
+    text-align: center;
+    /* Margin & Padding */
+    padding: 10px;
+}
+
+.main-nav .logo a, .main-nav .logo a:link, .main-nav .logo a:visited, .main-nav .logo a:hover {
+    /* Font */
+    color: $white;
+}
+
+.main-nav .vert-nav {
+    /* Margin & Padding */
+    padding: 0;
+}
+
+.main-nav .vert-nav .heading {
+    background-color: $black;
+    /* Font */
+    font-family: 'Raleway', sans-serif;
+    font-weight: 300;
+    /* Margin & Padding */
+    padding: 5px 10px 5px 10px;
+    /* Border */
+    border-bottom: 1px solid $gray-800;
+}
+
+.vert-nav ul {
+    list-style: none;
+    /* Margin & Padding */
+    margin: 0;
+    padding: 0;
+}
+
+.vert-nav ul > li {
+    /* Border */
+    border-bottom: 1px solid $gray-800;
+    /*  Margin & Padding */
+    margin: 0;
+    padding: 0;
+}
+
+.vert-nav ul > li > a, .vert-nav ul > li > a:link, .vert-nav ul > li > a:visited {
+    display: block;
+    /* Position */
+    position: relative;
+    /* Font */
+    color: $white;
+    /* Margin & Padding */
+    padding: 10px;
+}
+
+.vert-nav ul > li > a:hover {
+    background-color: $gray-800;
+    /* Font */
+    text-decoration: none;
+}
+
+.vert-nav ul > li > a:after {
+    content: '\f105';
+    /* Font */
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    /* Position */
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+.vert-nav ul > li > a.current, .vert-nav ul > li > a:link.current, .vert-nav ul > li > a:visited.current, .vert-nav ul > li > a:hover.current {
+    background-color: $white;
+    /* Font */
+    color: $black;
+}
+
+@media screen and (max-width: 767px) {
+    .vert-nav {
+        display: none;
+    }
+}
+
+/*
+ * Main Content
+ */
+.wrapper .main-content {
+    height: 100%;
+    overflow-y: auto;
+    /* Margin & Padding */
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+/*
+ * SimpleMDE
+ */
+ .markdown-editor {
+    /* Font */
+    font-family: 'Merriweather', serif;
+}
+
+/*
+ * Page Editor
+ */
+.page-toolbar {
+    /* Margin & Padding */
+    margin-bottom: 20px;
+}
+
+.movable {
+    /* Cursor */
+    cursor: move;
+}
+
+/*
+ * Footer
+ */
+.footer a, .footer a:link, .footer a:visited {
+    /* Font */
+    color: $gray-600;
+}
+
+.footer a:hover {
+    /* Font */
+    text-decoration: none;
+    /* Border */
+    border-bottom: 1px solid $gray-600;
+}
+
+/*
+ * Scrollbar
+ */
+::-webkit-scrollbar-track {
+    border-radius: 2px;
+    background-color: transparent;
+    /* $gray-200 */
+}
+  
+::-webkit-scrollbar {
+    width: 5px;
+}
+  
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: rgba(101, 109, 120, 0.3);
+}
+
+/* A font by Jos Buivenga (exljbris) -> www.exljbris.com */
+@font-face {
+    font-family: Diavlo;
+    src: url('../webfonts/diavlo/Diavlo_BOOK_II_37.otf');
+}
+
+.diavlo {
+    font-family: Diavlo, sans-serif;
+}
+
+.merriweather {
+    /* Font */
+    font-family: 'Merriweather', serif;
+}
