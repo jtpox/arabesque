@@ -6,6 +6,8 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import VueSimplemde from 'vue-simplemde'
 
+import { version } from '../package.json'
+
 
 import App from './App'
 import router from './router'
@@ -16,7 +18,7 @@ import { store } from './components/store'
  * Lurex is a type of bow that is tied using a ribbon.
  */
 console.log(
-  '%carabesque 2018.4.6' + '%cfor ribbon',
+  `%carabesque ${version}` + '%cfor ribbon',
   'color: #f5f7fa;background-color:#6a50a7;padding:3px;border-top-left-radius:4px;border-bottom-left-radius:4px;',
   'color:#f5f7fa;background-color:#323133;padding:3px;border-top-right-radius:4px;border-bottom-right-radius:4px;'
 )
