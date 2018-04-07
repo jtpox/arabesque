@@ -8,13 +8,15 @@
                 </span>
             </div>
             <h1 class="d-none d-md-block diavlo">ribbon</h1>
-            <p class="d-none d-md-block lead">{{ currentUser.username }}</p>
         </div>
-        <b-collapse class="vert-nav collapse" id="main-nav" v-model="mainNavCollapse">
-            <ul>
-                <li><router-link :to="{ name: 'About' }" active-class="current"><span class="badge badge-light"><i class="far fa-address-card"></i></span> About Me</router-link></li>
-                <li v-on:click.prevent="logOut()"><a href=""><span class="badge badge-light"><i class="fas fa-sign-out-alt"></i></span> Log Out</a></li>
-            </ul>
+        <b-collapse class="vert-nav" id="main-nav">
+            <b-btn v-b-toggle="'profile-nav'" class="profile-heading">{{ currentUser.username }}</b-btn>
+            <b-collapse id="profile-nav">
+                <ul>
+                    <li><router-link :to="{ name: 'About' }" active-class="current"><span class="badge badge-light"><i class="far fa-address-card"></i></span> About Me</router-link></li>
+                    <li v-on:click.prevent="logOut()"><a href=""><span class="badge badge-light"><i class="fas fa-sign-out-alt"></i></span> Log Out</a></li>
+                </ul>
+            </b-collapse>
             <div class="heading">Blog</div>
             <ul>
                 <li><router-link :to="{ name: 'Posts' }" active-class="current"><span class="badge badge-light"><i class="far fa-list-alt"></i></span> Posts</router-link></li>
@@ -37,7 +39,6 @@ export default {
     name: 'Navigation',
     data() {
         return{
-            mainNavCollapse: true
         }
     },
     computed: {

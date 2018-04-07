@@ -75,6 +75,40 @@ a, a:link, a:visited, a:hover {
     border-bottom: 1px solid $gray-800;
 }
 
+.profile-container {
+    /* Position */
+    position: relative;
+}
+
+.main-nav .vert-nav .profile-heading {
+    background-color: $purple;
+    background: $purple;
+    width: 100%;
+    /* Font */
+    font-family: 'Raleway', sans-serif;
+    font-weight: 300;
+    text-align: left;
+    /* Position */
+    position: relative;
+    /* Margin & Padding */
+    padding: 10px;
+    /* Border */
+    border: none;
+    /* Border Radius */
+    border-radius: 0;
+}
+
+.main-nav .vert-nav .profile-heading:after {
+    content: '\f078';
+    /* Font */
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    /* Position */
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
 .vert-nav ul {
     list-style: none;
     /* Margin & Padding */
@@ -126,6 +160,12 @@ a, a:link, a:visited, a:hover {
 @media screen and (max-width: 767px) {
     .vert-nav {
         display: none;
+    }
+}
+
+@media screen and (min-width: 786px) {
+    .vert-nav {
+        display: block !important;
     }
 }
 
