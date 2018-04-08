@@ -14,6 +14,7 @@
             <b-collapse id="profile-nav">
                 <ul>
                     <li><router-link :to="{ name: 'About' }" active-class="current"><span class="badge badge-light"><i class="far fa-address-card"></i></span> About Me</router-link></li>
+                    <li><router-link :to="{ name: 'Avatar' }" active-class="current"><span class="badge badge-light"><i class="far fa-user-circle"></i></span> Avatar</router-link></li>
                     <li v-on:click.prevent="logOut()"><a href=""><span class="badge badge-light"><i class="fas fa-sign-out-alt"></i></span> Log Out</a></li>
                 </ul>
             </b-collapse>

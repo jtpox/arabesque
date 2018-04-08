@@ -5,6 +5,7 @@ import { store } from '@/components/store'
 import Index from '@/components/index/Index'
 
 import About from '@/components/personal/About'
+import Avatar from '@/components/personal/Avatar'
 
 import Posts from '@/components/posts/List'
 import NewPost from '@/components/posts/New'
@@ -34,6 +35,12 @@ const router = new Router({
       path: '/about',
       name: 'About',
       component: About,
+      meta: { isLogged: true }
+    },
+    {
+      path: '/avatar',
+      name: 'Avatar',
+      component: Avatar,
       meta: { isLogged: true }
     },
     {
