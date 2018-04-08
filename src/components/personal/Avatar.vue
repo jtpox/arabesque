@@ -7,7 +7,7 @@
                     <div class="col-md-8 offset-md-2">
 
                         <div class="page-header">
-                            <h1>About Me</h1>
+                            <h1>Avatar</h1>
                         </div>
                         <form v-on:submit.prevent="update()">
                             <div class="media">
