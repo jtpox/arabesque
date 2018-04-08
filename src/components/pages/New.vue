@@ -39,11 +39,14 @@
                     </div>
                 </div>
 
-                <draggable v-model="page.boxes" class="row">
+                <draggable v-model="page.boxes" class="row" :options="{ handle: '.movable' }">
                     <div v-for="(box, index) in page.boxes" :key="index" v-bind:class="'col-md-' + box.content_column">
                         <div class="card movable">
                             <div class="card-body">
                                 <div class="input-group mb-3">
+                                    <div class="input-group-prepend movable">
+                                        <span class="input-group-text"><i class="fas fa-arrows-alt"></i></span>
+                                    </div>
                                     <input type="text" class="form-control merriweather" v-model="box.title" placeholder="Title" />
                                     <div class="input-group-append">
                                         <button type="button" class="btn btn-danger" v-on:click.prevent="removeBox(index)"><i class="far fa-trash-alt"></i></button>
