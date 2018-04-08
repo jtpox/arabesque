@@ -7,7 +7,7 @@
 
                     <div class="col-md-10">
                         <div class="form-group">
-                            <input type="text" class="form-control form-control-lg merriweather" v-model="title" placeholder="Title" />
+                            <input type="text" class="form-control form-control-lg merriweather" v-model="title" placeholder="Title" v-on:keyup="slugify" />
                         </div>
                         <div class="form-group">
                             <markdown-editor v-model="content"></markdown-editor>
@@ -19,6 +19,15 @@
                             <div class="card-body">
                                 <p class="card-text">
                                     <button type="button" class="btn btn-primary btn-lg btn-block" v-on:click="post()">Post</button>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">URL</h4>
+                                <p class="card-text">
+                                    <input type="text" class="form-control" v-model="url" />
                                 </p>
                             </div>
                         </div>
@@ -80,6 +89,8 @@ import Navigation from '../Navigation.vue'
 import ImagesWidget from '../widgets/Images.vue'
 import markdownEditor from 'vue-simplemde/src/markdown-editor'
 
+import slugify from 'slugify'
+
 export default {
   name: 'NewPost',
   components: {
@@ -97,7 +108,8 @@ export default {
         content: null,
         selected_tag: null,
         schedule: new Date(),
-        hidden: false
+        hidden: false,
+        url: null,
     }
   },
   computed: {
@@ -114,6 +126,9 @@ export default {
               console.log(err);
           });
       },
+      slugify() {
+          this.url = slugify(this.title)
+      },
       post() {
           let formData = {
               title: this.title,
@@ -121,7 +136,8 @@ export default {
               tag: this.selected_tag,
               image: (this.$store.state.selectedImage == null) ? null : this.$store.state.selectedImage._id,
               schedule: this.schedule,
-              hidden: this.hidden
+              hidden: this.hidden,
+              url: this.url
           }
           // console.log(formData);
 

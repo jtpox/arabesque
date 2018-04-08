@@ -23,7 +23,10 @@
                 <div class="row">
                     <div v-bind:class="{ 'col-md-12': !selectedImage, 'col-md-9': selectedImage }">
                         <div class="form-group">
-                            <input type="text" v-model="page.title" class="form-control form-control-lg merriweather" placeholder="Title" />
+                            <input type="text" v-model="page.title" class="form-control form-control-lg merriweather" placeholder="Title" v-on:keyup="slugify" />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control form-control-sm merriweather" v-model="page.url" placeholder="Page URL" />
                         </div>
                     </div>
 
@@ -79,6 +82,8 @@ import ImagesWidget from '../widgets/Images.vue'
 import markdownEditor from 'vue-simplemde/src/markdown-editor'
 import draggable from 'vuedraggable'
 
+import slugify from 'slugify'
+
 export default {
   name: 'EditPage',
   components: {
@@ -101,6 +106,7 @@ export default {
             title: null,
             content: null,
             hidden: false,
+            url: null,
             boxes: []
         },
         alerts: {
@@ -114,6 +120,7 @@ export default {
               this.page.title = res.data.details.title
               this.page.content = res.data.details.description
               this.page.hidden = res.data.details.hidden
+              this.page.url = res.data.details.url
 
               this.page.boxes = res.data.boxes
               
@@ -133,12 +140,16 @@ export default {
               content_column: 3
           })
       },
+      slugify() {
+          this.page.url = slugify(this.page.title)
+      },
       update() {
           this.alerts.success = false
           var formData = {
               title: this.page.title,
               content: this.page.content,
               hidden: this.page.hidden,
+              url: this.page.url,
               image: (this.$store.state.selectedImage == null) ? null : this.$store.state.selectedImage._id,
               boxes: JSON.stringify(this.page.boxes)
           }

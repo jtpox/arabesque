@@ -22,7 +22,10 @@
                 <div class="row">
                     <div v-bind:class="{ 'col-md-12': !selectedImage, 'col-md-9': selectedImage }">
                         <div class="form-group">
-                            <input type="text" v-model="page.title" class="form-control form-control-lg merriweather" placeholder="Title" />
+                            <input type="text" v-model="page.title" class="form-control merriweather" placeholder="Title" v-on:keyup="slugify" />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control form-control-sm merriweather" v-model="page.url" placeholder="Page URL" />
                         </div>
                     </div>
 
@@ -41,7 +44,7 @@
 
                 <draggable v-model="page.boxes" class="row" :options="{ handle: '.movable' }">
                     <div v-for="(box, index) in page.boxes" :key="index" v-bind:class="'col-md-' + box.content_column">
-                        <div class="card movable">
+                        <div class="card">
                             <div class="card-body">
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend movable">
@@ -78,6 +81,8 @@ import ImagesWidget from '../widgets/Images.vue'
 import markdownEditor from 'vue-simplemde/src/markdown-editor'
 import draggable from 'vuedraggable'
 
+import slugify from 'slugify'
+
 export default {
   name: 'NewPage',
   components: {
@@ -97,6 +102,7 @@ export default {
             title: null,
             content: null,
             hidden: false,
+            url: null,
             boxes: [
                 {
                     title: 'Example',
@@ -123,11 +129,15 @@ export default {
               content_column: 3
           })
       },
+      slugify() {
+          this.page.url = slugify(this.page.title)
+      },
       publish() {
           var formData = {
               title: this.page.title,
               content: this.page.content,
               hidden: this.page.hidden,
+              url: this.page.url,
               image: (this.$store.state.selectedImage == null) ? null : this.$store.state.selectedImage._id,
               boxes: JSON.stringify(this.page.boxes)
           }
