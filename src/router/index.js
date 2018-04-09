@@ -15,6 +15,8 @@ import Pages from '@/components/pages/List'
 import NewPage from '@/components/pages/New'
 import EditPage from '@/components/pages/Edit'
 
+import Navigation from '@/components/navigation/List'
+
 import UsersList from '@/components/users/List'
 
 import TagsList from '@/components/tags/List'
@@ -95,6 +97,12 @@ const router = new Router({
       path: '/edit/page/:id',
       name: 'EditPage',
       component: EditPage,
+      meta: { isLogged: true }
+    },
+    {
+      path: '/navigation',
+      name: 'Navigation',
+      component: Navigation,
       meta: { isLogged: true }
     }
   ]

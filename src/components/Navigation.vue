@@ -29,6 +29,7 @@
                 <li><router-link :to="{ name: 'Users' }" active-class="current"><span class="badge badge-light"><i class="fas fa-users"></i></span> Users</router-link></li>
                 <li><router-link :to="{ name: 'Tags' }" active-class="current"><span class="badge badge-light"><i class="fas fa-tags"></i></span> Tags</router-link></li>
                 <li><router-link :to="{ name: 'Pages' }" active-class="current"><span class="badge badge-light"><i class="fas fa-book"></i></span> Pages</router-link></li>
+                <li><router-link :to="{ name: 'Navigation' }" active-class="current"><span class="badge badge-light"><i class="fas fa-link"></i></span> Navigation</router-link></li>
                 <li><router-link :to="{ name: 'Images' }" active-class="current"><span class="badge badge-light"><i class="far fa-images"></i></span> Images</router-link></li>
             </ul>
         </b-collapse>
