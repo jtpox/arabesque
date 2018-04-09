@@ -186,11 +186,11 @@ export default {
             this.edit.url = this.links[index].link
         } else if(this.links[index].page) {
             this.edit.selection = 2
-            this.edit.page = this.links[index].page
         }
     },
     changeEdit(index) {
         this.links[index].title = this.edit.title
+        //console.log(this.links[index])
         if (this.edit.selection == 1){
             this.links[index].url = this.edit.url
         } else if(this.edit.selection == 2) {
@@ -208,17 +208,22 @@ export default {
         this.links.splice(index, 1)
     },
     saveChanges() {
-        this.alerts.update.success = false
-        this.alerts.update.error = false
-
-        // Converting all page indexes to page id.
+        var data = []
         for (var i = 0; i < this.links.length; i++){
             if (this.links[i].page){
-                this.links[i].page = this.links[i].page._id
+                data.push({
+                    title: this.links[i].title,
+                    page: this.links[i].page._id,
+                })
+            } else if(this.links[i].url) {
+                data.push({
+                    title: this.links[i].title,
+                    url: this.links[i].url,
+                })
             }
         }
 
-        this.axios.post(this.api + '/nav', { nav: JSON.stringify(this.links) }).then((res) => {
+        this.axios.post(this.api + '/nav', { nav: JSON.stringify(data) }).then((res) => {
             if (res.data.error == 0){
                 this.alerts.update.success = true;
             } else {
