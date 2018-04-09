@@ -15,7 +15,6 @@ import { store } from './components/store'
 
 /*
  * Introduction for users who opened the console.
- * Lurex is a type of bow that is tied using a ribbon.
  */
 console.log(
   `%carabesque ${version}` + '%cfor ribbon',

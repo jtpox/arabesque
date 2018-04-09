@@ -56,7 +56,7 @@
 
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-primary">Edit</button>
-                                        <button type="button" class="btn btn-danger" v-on:click.prevent="deleteLink(index)">Delete</button>
+                                        <button type="button" class="btn btn-danger" v-on:click.prevent="deleteLink(edit.index)">Delete</button>
                                     </div>
                                 </form>
                             </div>
@@ -141,7 +141,7 @@ export default {
       this.axios
         .get(this.api + "/nav")
         .then(res => {
-            console.log(res.data)
+          // console.log(res.data)
           this.links = res.data;
         })
         .catch(err => {
@@ -198,14 +198,14 @@ export default {
         }
     },
     deleteLink(index) {
-        this.links.splice(index, 1)
-
         //Reset edit.
         this.edit.index = null
         this.edit.selection = 1
         this.edit.title = null
         this.edit.url = null
         this.edit.page = null
+
+        this.links.splice(index, 1)
     },
     saveChanges() {
         this.alerts.update.success = false
@@ -213,8 +213,8 @@ export default {
 
         // Converting all page indexes to page id.
         for (var i = 0; i < this.links.length; i++){
-            if (this.links[i].page >= 0){
-                this.links[i].page = this.pages[this.links[i].page]._id
+            if (this.links[i].page){
+                this.links[i].page = this.links[i].page._id
             }
         }
 
