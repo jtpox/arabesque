@@ -13,7 +13,7 @@
                         <draggable v-model="links" :options="{ handle: '.movable' }" class="list-group list-group-flush">
                             <a href="#" class="list-group-item" v-for="(link, index) in links" :key="index" v-on:click.prevent="editLink(index)">
                                 <div class="justify-content-between">
-                                    <h5><i class="fas fa-arrows-alt-v movable"></i> {{ link.title }}</h5>
+                                    <h5><span class="badge badge-danger movable"><i class="fas fa-arrows-alt-v"></i></span> {{ link.title }}</h5>
                                     <small v-if="link.link">Link: {{ link.link }}</small>
                                     <small v-if="link.page">Page: {{ link.page.title }}</small>
                                 </div>
@@ -47,7 +47,7 @@
                                                 <option value="2">Page</option>
                                             </select>
                                         </div>
-                                        <input type="text" class="form-control" placeholder="URL" v-show="edit.selection == 1" v-model="edit.url" />
+                                        <input type="text" class="form-control" placeholder="URL" v-show="edit.selection == 1" v-model="edit.link" />
 
                                         <select v-model="edit.page" class="form-control" v-show="edit.selection == 2">
                                             <option v-for="(page, index) in pages" :key="index" :value="index">{{ page.title }}</option>
@@ -77,7 +77,7 @@
                                                 <option value="2">Page</option>
                                             </select>
                                         </div>
-                                        <input type="text" class="form-control" placeholder="URL" v-show="add.selection == 1" v-model="add.url" />
+                                        <input type="text" class="form-control" placeholder="URL" v-show="add.selection == 1" v-model="add.link" />
 
                                         <select v-model="add.page" class="form-control" v-show="add.selection == 2">
                                             <option v-for="(page, index) in pages" :key="page._id" :value="index">{{ page.title }}</option>
@@ -124,14 +124,14 @@ export default {
       add: {
         selection: 1, // 1 = link, 2 = page
         title: null,
-        url: null,
+        link: null,
         page: null
       },
       edit: {
           index: null,
           selection: 1, // 1 = link, 2 = page
           title: null,
-          url: null,
+          link: null,
           page: null,
       }
     };
@@ -162,7 +162,7 @@ export default {
       if (this.add.selection == 1) {
         this.links.push({
           title: this.add.title,
-          link: this.add.url
+          link: this.add.link
         });
       } else if(this.add.selection == 2) {
         this.links.push({
@@ -183,7 +183,7 @@ export default {
         
         if (this.links[index].link){
             this.edit.selection = 1
-            this.edit.url = this.links[index].link
+            this.edit.link = this.links[index].link
         } else if(this.links[index].page) {
             this.edit.selection = 2
         }
@@ -192,7 +192,7 @@ export default {
         this.links[index].title = this.edit.title
         //console.log(this.links[index])
         if (this.edit.selection == 1){
-            this.links[index].url = this.edit.url
+            this.links[index].link = this.edit.link
         } else if(this.edit.selection == 2) {
             this.links[index].page = this.pages[this.edit.page]
         }
@@ -202,23 +202,24 @@ export default {
         this.edit.index = null
         this.edit.selection = 1
         this.edit.title = null
-        this.edit.url = null
+        this.edit.link = null
         this.edit.page = null
 
         this.links.splice(index, 1)
     },
     saveChanges() {
         var data = []
+        console.log(this.links)
         for (var i = 0; i < this.links.length; i++){
             if (this.links[i].page){
                 data.push({
                     title: this.links[i].title,
                     page: this.links[i].page._id,
                 })
-            } else if(this.links[i].url) {
+            } else if(this.links[i].link) {
                 data.push({
                     title: this.links[i].title,
-                    url: this.links[i].url,
+                    link: this.links[i].link,
                 })
             }
         }
