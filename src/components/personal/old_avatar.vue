@@ -16,15 +16,7 @@
                                     <div class="alert alert-success text-center" v-show="alerts.success"><i class="far fa-thumbs-up"></i></div>
                                     <div class="alert alert-danger text-center" v-show="alerts.error">Error updating.</div>
                                     <div class="form-group">
-                                        <FilePond
-                                        name="file"
-                                        ref="file"
-                                        labelIdle="Browse or drop file here..."
-                                        allowMultiple="false"
-                                        instantUpload="false"
-                                        acceptedFileTypes="image/jpeg, image/png, image/gif"
-                                        allowImagePreview="true"
-                                        @addfile="uploadFieldChange" />
+                                        <input type="file" class="form-control" id="attachments" @change="uploadFieldChange">
                                     </div>
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-primary">Update</button>
@@ -42,24 +34,13 @@
 
 <script>
 import Navigation from '../Navigation.vue'
-import FilePond, { registerPlugin } from 'vue-filepond'
-
-import 'filepond/dist/filepond.min.css'
-import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css'
-
-import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type'
-import FilepondPluginImagePreview from 'filepond-plugin-image-preview'
-registerPlugin(FilePondPluginFileValidateType)
-registerPlugin(FilepondPluginImagePreview)
 
 export default {
   name: 'Avatar',
   components: {
-      Navigation,
-      FilePond
+      Navigation
   },
   created() {
-
       this.getDetails()
   },
   data () {
@@ -69,7 +50,9 @@ export default {
             success: false,
             error: false
         },
-        attachments: []
+        images: [],
+        attachments: [],
+        data: new FormData()
     }
   },
   methods: {
@@ -81,8 +64,14 @@ export default {
               console.log(err);
           });
       },
-      uploadFieldChange() {
-          var files = this.$refs.file.getFiles();
+      getAttachmentSize() {
+          this.upload_size = 0;
+          this.attachments.map((item) => { this.upload_size += parseInt(item.size) })
+          this.upload_size = Number((this.upload_size).toFixed(1))
+          this.$forceUpdate()
+      },
+      uploadFieldChange(e) {
+          var files = e.target.files || e.dataTransfer.files;
           if (!files.length){
               return;
           }
@@ -91,18 +80,24 @@ export default {
               this.attachments.push(files[i])
           }
       },
+      prepareFields() {
+          if (this.attachments.length > 0) {
+              for (var i = 0; i < this.attachments.length; i++) {
+                  let attachment = this.attachments[i];
+                  this.data.append('file', attachment);
+                  //this.data = attachment;
+              }
+          }
+      },
       resetData() {
+          this.data = new FormData()
           this.attachments = []
-          // document.getElementById("attachments").value = [];
+          document.getElementById("attachments").value = [];
       },
       update() {
         this.alerts.success = false
         this.alerts.error = false
-
-        // console.log(this.attachments[0].file)
-        var data = new FormData()
-        data.append('file', this.attachments[0].file)
-
+        this.prepareFields()
           var config = {
               headers: {
                   'Content-Type': 'multipart/form-data',
@@ -111,9 +106,7 @@ export default {
               }
           }
 
-          // console.log(data)
-
-          this.axios.post(this.api + '/auth/update/avatar', data, config).then((res) => {
+          this.axios.post(this.api + '/auth/update/avatar', this.data, config).then((res) => {
               // console.log(res)
               if (res.data.error == 0){
                   this.avatar = res.data.image;

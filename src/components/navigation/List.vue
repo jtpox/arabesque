@@ -174,7 +174,7 @@ export default {
 
       // Clear inputs
         this.add.title = null
-        this.add.url = null
+        this.add.link = null
         this.add.page = null
     },
     editLink(index) {

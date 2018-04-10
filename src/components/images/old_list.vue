@@ -9,26 +9,24 @@
                         <div class="page-header">
                             <h1>Images</h1>
                         </div>
-                        <div class="table-responsive">
-                            <table class="table table-hover">
-                                <thead>
-                                    <th width="20%">Preview</th>
-                                    <th>Name</th>
-                                    <th>URL</th>
-                                    <th>By</th>
-                                    <th>Options</th>
-                                </thead>
-                                <tbody>
-                                    <tr v-for="(image, index) in images" :key="image._id">
-                                        <td><img :src="'/uploads/images/' + image.file_name" class="img-fluid" :alt="image.file_name" /></td>
-                                        <td>{{ image.title }}</td>
-                                        <td>/uploads/images/{{ image.file_name }}</td>
-                                        <td>{{ image.created_by.username }}</td>
-                                        <td><button type="button" class="btn btn-danger btn-sm" v-on:click.prevent="delete_image(index)"><i class="far fa-trash-alt"></i></button></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                        <table class="table table-hover">
+                            <thead>
+                                <th width="20%">Preview</th>
+                                <th>Name</th>
+                                <th>URL</th>
+                                <th>By</th>
+                                <th>Options</th>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(image, index) in images" :key="image._id">
+                                    <td><img :src="'/uploads/images/' + image.file_name" class="img-fluid" :alt="image.file_name" /></td>
+                                    <td>{{ image.title }}</td>
+                                    <td>/uploads/images/{{ image.file_name }}</td>
+                                    <td>{{ image.created_by.username }}</td>
+                                    <td><button type="button" class="btn btn-danger btn-sm" v-on:click.prevent="delete_image(index)"><i class="far fa-trash-alt"></i></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
 
                     <div class="col-md-3">
@@ -38,15 +36,7 @@
                                 <div class="form-group">
                                     <div class="alert alert-success text-center" v-show="alerts.new.success"><i class="far fa-thumbs-up"></i></div>
                                     <div class="alert alert-danger text-center" v-show="alerts.new.error">Error uploading image.</div>
-                                    <FilePond
-                                        name="file"
-                                        ref="file"
-                                        labelIdle="Browse or drop file here..."
-                                        allowMultiple="false"
-                                        instantUpload="false"
-                                        acceptedFileTypes="image/jpeg, image/png, image/gif"
-                                        allowImagePreview="true"
-                                        @addfile="uploadFieldChange" />
+                                    <input type="file" class="form-control" id="attachments" @change="uploadFieldChange">
                                 </div>
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary" v-on:click.prevent="upload()">Submit</button>
@@ -62,21 +52,11 @@
 
 <script>
 import Navigation from '../Navigation.vue'
-import FilePond, { registerPlugin } from 'vue-filepond'
-
-import 'filepond/dist/filepond.min.css'
-import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css'
-
-import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type'
-import FilepondPluginImagePreview from 'filepond-plugin-image-preview'
-registerPlugin(FilePondPluginFileValidateType)
-registerPlugin(FilepondPluginImagePreview)
 
 export default {
   name: 'ImagesList',
   components: {
-      Navigation,
-      FilePond
+      Navigation
   },
   created() {
       this.getImages()
@@ -91,6 +71,7 @@ export default {
             }
         },
         attachments: [],
+        data: new FormData()
     }
   },
   methods: {
@@ -110,8 +91,15 @@ export default {
               console.log(err)
           })
       },
-      uploadFieldChange() {
-          var files = this.$refs.file.getFiles();
+
+      getAttachmentSize() {
+          this.upload_size = 0;
+          this.attachments.map((item) => { this.upload_size += parseInt(item.size) })
+          this.upload_size = Number((this.upload_size).toFixed(1))
+          this.$forceUpdate()
+      },
+      uploadFieldChange(e) {
+          var files = e.target.files || e.dataTransfer.files;
           if (!files.length){
               return;
           }
@@ -120,11 +108,17 @@ export default {
               this.attachments.push(files[i])
           }
       },
+      prepareFields() {
+          if (this.attachments.length > 0) {
+              for (var i = 0; i < this.attachments.length; i++) {
+                  let attachment = this.attachments[i];
+                  this.data.append('file', attachment);
+                  //this.data = attachment;
+              }
+          }
+      },
       upload() {
-          
-          var data = new FormData()
-          data.append('file', this.attachments[0].file)
-
+          this.prepareFields()
           var config = {
               headers: {
                   'Content-Type': 'multipart/form-data',
@@ -133,7 +127,7 @@ export default {
               }
           }
 
-          this.axios.post(this.api + '/images', data, config).then((res) => {
+          this.axios.post(this.api + '/images', this.data, config).then((res) => {
               // console.log(res)
               this.alerts.new.success = false
               this.alerts.new.error = false
@@ -152,7 +146,9 @@ export default {
           })
       },
       resetData() {
+          this.data = new FormData()
           this.attachments = []
+          document.getElementById("attachments").value = [];
       }
   }
 }
