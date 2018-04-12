@@ -24,7 +24,8 @@
                                         instantUpload="false"
                                         acceptedFileTypes="image/jpeg, image/png, image/gif"
                                         allowImagePreview="true"
-                                        @addfile="uploadFieldChange" />
+                                        @addfile="uploadFieldChange"
+                                        @removefile="removeUploadField" />
                                     </div>
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-primary">Update</button>
@@ -90,6 +91,9 @@ export default {
           for (var i = files.length - 1; i >= 0; i--){
               this.attachments.push(files[i])
           }
+      },
+      removeUploadField() {
+          this.attachments = []
       },
       resetData() {
           this.attachments = []
