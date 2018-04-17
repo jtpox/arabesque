@@ -50,7 +50,8 @@
                             <div class="card-body">
                                 <h4 class="card-title">Schedule</h4>
                                 <p class="card-text">
-                                    <input type="date" class="form-control" :value="schedule && schedule.toISOString().split('T')[0]" />
+                                    <small>Original Schedule: {{ original_schedule.toLocaleDateString() }}</small>
+                                    <input type="date" class="form-control" v-model="schedule" />
                                 </p>
                             </div>
                         </div>
@@ -117,6 +118,7 @@ export default {
         content: null,
         selected_tag: null,
         schedule: new Date(),
+        original_schedule: new Date(),
         hidden: false,
         url: null,
 
@@ -145,6 +147,7 @@ export default {
               this.content = res.data[0].content
               this.selected_tag = res.data[0].tag._id
               this.schedule = new Date(res.data[0].created_at)
+              this.original_schedule = new Date(res.data[0].created_at)
               this.hidden = res.data[0].hidden
               this.url = res.data[0].url
 
@@ -176,6 +179,9 @@ export default {
               // console.log(res)
               if (res.data.error == 0) {
                   this.success = true
+
+                  // Change original schedule date.
+                  this.original_schedule = new Date(this.schedule);
               }
               else
               {

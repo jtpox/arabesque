@@ -47,7 +47,7 @@
                             <div class="card-body">
                                 <h4 class="card-title">Schedule</h4>
                                 <p class="card-text">
-                                    <input type="date" class="form-control" :value="schedule && schedule.toISOString().split('T')[0]" />
+                                    <input type="date" class="form-control" v-model="schedule" />
                                 </p>
                             </div>
                         </div>
@@ -130,6 +130,7 @@ export default {
           this.url = slugify(this.title)
       },
       post() {
+          console.log(this.schedule);
           let formData = {
               title: this.title,
               content: this.content,
