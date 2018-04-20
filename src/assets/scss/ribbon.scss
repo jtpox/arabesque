@@ -183,7 +183,12 @@ a, a:link, a:visited, a:hover {
 /*
  * SimpleMDE
  */
- .markdown-editor {
+.markdown-editor {
+    /* Font */
+    font-family: 'Monaco', courier, monospace;
+}
+
+.editor-preview, .editor-preview h1, .editor-preview h2, .editor-preview h3, .editor-preview h4, .editor-preview h5 {
     /* Font */
     font-family: 'Merriweather', serif;
 }
@@ -247,4 +252,9 @@ a, a:link, a:visited, a:hover {
 .merriweather {
     /* Font */
     font-family: 'Merriweather', serif;
+}
+
+.monaco {
+    /* Font */
+    font-family: 'Monaco', courier, monospace;
 }

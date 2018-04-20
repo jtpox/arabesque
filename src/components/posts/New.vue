@@ -130,7 +130,6 @@ export default {
           this.url = slugify(this.title)
       },
       post() {
-          console.log(this.schedule);
           let formData = {
               title: this.title,
               content: this.content,

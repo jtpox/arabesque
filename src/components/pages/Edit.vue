@@ -22,11 +22,17 @@
 
                 <div class="row">
                     <div v-bind:class="{ 'col-md-12': !selectedImage, 'col-md-9': selectedImage }">
-                        <div class="form-group">
-                            <input type="text" v-model="page.title" class="form-control form-control-lg merriweather" placeholder="Title" v-on:keyup="slugify" />
+                        <div class="input-group input-group-lg form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-heading"></i></span>
+                            </div>
+                            <input type="text" v-model="page.title" class="form-control merriweather" placeholder="Title" v-on:keyup="slugify" />
                         </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control form-control-sm merriweather" v-model="page.url" placeholder="Page URL" />
+                        <div class="form-group input-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-link"></i></span>
+                            </div>
+                            <input type="text" class="form-control merriweather" v-model="page.url" placeholder="Page URL" />
                         </div>
                     </div>
 
@@ -58,7 +64,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <textarea class="form-control merriweather" v-model="box.content" placeholder="Content"></textarea>
+                                    <textarea class="form-control monaco" v-model="box.content" placeholder="Content"></textarea>
                                     <small>Markdown is enabled.</small>
                                 </div>
 
