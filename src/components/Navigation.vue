@@ -7,7 +7,7 @@
                     <a v-b-toggle="'main-nav'"><i class="fas fa-bars"></i></a>
                 </span>
             </div>
-            <h1 class="d-none d-md-block diavlo">ribbon</h1>
+            <h1 class="d-none d-md-block diavlo"><router-link :to="{ name: 'Info' }">ribbon</router-link></h1>
         </div>
         <b-collapse class="vert-nav" id="main-nav">
             <b-btn v-b-toggle="'profile-nav'" class="profile-heading">{{ currentUser.username }}</b-btn>

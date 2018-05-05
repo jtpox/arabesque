@@ -23,7 +23,7 @@
                 </div>
 
                 <footer class="footer text-center text-muted">
-                  <small><a href="https://github.com/jtpox/arabesque" target="_blank">arabesque</a> for <a href="https://github.com/jtpox/ribbon" target="_blank">ribbon</a></small>
+                  <small><a href="https://github.com/jtpox/arabesque" target="_blank">arabesque</a> for <a href="https://ribbon.jtpox.com/" target="_blank">ribbon</a></small>
                 </footer>
             </div>
 

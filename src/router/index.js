@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import { store } from '@/components/store'
 
 import Index from '@/components/index/Index'
+import Info from '@/components/index/Info'
 
 import About from '@/components/personal/About'
 import Avatar from '@/components/personal/Avatar'
@@ -32,6 +33,12 @@ const router = new Router({
       name: 'Index',
       component: Index,
       meta: { notLogged: true }
+    },
+    {
+      path: '/info',
+      name: 'Info',
+      component: Info,
+      meta: { isLogged: true }
     },
     {
       path: '/about',

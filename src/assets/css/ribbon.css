@@ -45,7 +45,8 @@ a, a:link, a:visited, a:hover {
 
 .main-nav .logo a, .main-nav .logo a:link, .main-nav .logo a:visited, .main-nav .logo a:hover {
   /* Font */
-  color: #ffffff; }
+  color: #ffffff;
+  text-decoration: none; }
 
 .main-nav .vert-nav {
   /* Margin & Padding */
