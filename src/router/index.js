@@ -7,6 +7,7 @@ import Info from '@/components/index/Info'
 
 import About from '@/components/personal/About'
 import Avatar from '@/components/personal/Avatar'
+import Password from '@/components/personal/Password'
 
 import Posts from '@/components/posts/List'
 import NewPost from '@/components/posts/New'
@@ -50,6 +51,12 @@ const router = new Router({
       path: '/avatar',
       name: 'Avatar',
       component: Avatar,
+      meta: { isLogged: true }
+    },
+    {
+      path: '/password',
+      name: 'Password',
+      component: Password,
       meta: { isLogged: true }
     },
     {
