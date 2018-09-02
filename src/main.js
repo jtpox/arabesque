@@ -5,6 +5,8 @@ import moment from 'moment'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import VueSimplemde from 'vue-simplemde'
+import VueChartkick from 'vue-chartkick'
+import Chart from 'chart.js'
 
 import { version } from '../package.json'
 
@@ -27,6 +29,7 @@ Vue.config.productionTip = false
 Vue.use(BootstrapVue)
 Vue.use(VueAxios, axios)
 Vue.use(VueSimplemde)
+Vue.use(VueChartkick, { adapter: Chart })
 
 Vue.filter('formatDate', (value) => {
   if(value) {
@@ -48,6 +51,7 @@ Vue.mixin({
     return {
       get api() {
         return '/api'
+        // return 'http://localhost:8081/api'
       }
     }
   }

@@ -14,6 +14,7 @@
                             <button type="button" class="btn btn-primary" v-on:click.prevent="page.hidden = !page.hidden">
                                 <i class="fas" v-bind:class="{ 'fa-eye': !page.hidden, 'fa-eye-slash': page.hidden }"></i> Page {{ (page.hidden) ? 'Hidden' : 'Viewable' }}
                             </button>
+                            <button type="button" class="btn btn-info" v-on:click.prevent="statModal"><i class="fas fa-chart-pie"></i> Statistics</button>
                             <button type="button" class="btn btn-danger" v-on:click.prevent="deletePage()"><i class="far fa-trash-alt"></i> Delete</button>
                             <button type="button" class="btn btn-success" v-on:click.prevent="update()"><i class="far fa-thumbs-up" v-show="alerts.success"></i> Update</button>
                         </span>
@@ -77,108 +78,179 @@
                 </draggable>
 
                 <ImagesWidget></ImagesWidget>
+                <b-modal ref="statModal" title="Statistics" size="lg" hide-footer>
+                    <div class="d-block">
+                        <h5>Visitors</h5>
+                        <line-chart :data="statDate"></line-chart>
+                    </div>
+                    <b-container fluid>
+                        <b-row>
+                            <b-col cols="6">
+                                <h5>Browsers</h5>
+                                <pie-chart :data="statBrowser"></pie-chart>
+                            </b-col>
+
+                            <b-col cols="6">
+                                <h5>Operating Systems</h5>
+                                <pie-chart :data="statOs"></pie-chart>
+                            </b-col>
+                        </b-row>
+                    </b-container>
+                </b-modal>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import Navigation from '../Navigation.vue'
-import ImagesWidget from '../widgets/Images.vue'
-import markdownEditor from 'vue-simplemde/src/markdown-editor'
-import draggable from 'vuedraggable'
+import Navigation from "../Navigation.vue";
+import ImagesWidget from "../widgets/Images.vue";
+import markdownEditor from "vue-simplemde/src/markdown-editor";
+import draggable from "vuedraggable";
 
-import slugify from 'slugify'
+import slugify from "slugify";
 
 export default {
-  name: 'EditPage',
+  name: "EditPage",
   components: {
-      Navigation,
-      ImagesWidget,
-      markdownEditor,
-      draggable,
+    Navigation,
+    ImagesWidget,
+    markdownEditor,
+    draggable
   },
   created() {
-      this.getPage()
+    this.getPage();
   },
   computed: {
-      selectedImage() {
-          return this.$store.state.selectedImage
-      }
-  },
-  data () {
-    return {
-        page: {
-            title: null,
-            content: null,
-            hidden: false,
-            url: null,
-            boxes: []
-        },
-        alerts: {
-            success: false
-        }
+    selectedImage() {
+      return this.$store.state.selectedImage;
     }
   },
+  data() {
+    return {
+      page: {
+        title: null,
+        content: null,
+        hidden: false,
+        url: null,
+        boxes: []
+      },
+      alerts: {
+        success: false
+      },
+      statDate: [],
+      statBrowser: [],
+      statOs: [],
+    };
+  },
   methods: {
-      getPage() {
-          this.axios.get(this.api + '/pages/' + this.$route.params.id).then((res) => {
-              this.page.title = res.data.details.title
-              this.page.content = res.data.details.description
-              this.page.hidden = res.data.details.hidden
-              this.page.url = res.data.details.url
+    getPage() {
+      this.axios
+        .get(this.api + "/pages/" + this.$route.params.id)
+        .then(res => {
+          this.page.title = res.data.details.title;
+          this.page.content = res.data.details.description;
+          this.page.hidden = res.data.details.hidden;
+          this.page.url = res.data.details.url;
 
-              this.page.boxes = res.data.boxes
-              
-              this.$store.commit('selectImage', ((res.data.details.image) ? res.data.details.image : null))
-          })
-          .catch((err) => {
-              console.log(err)
-          })
-      },
-      removeBox(index) {
-          this.page.boxes.splice(index, 1)
-      },
-      addBox() {
-          this.page.boxes.push({
-              title: null,
-              content: null,
-              content_column: 3
-          })
-      },
-      slugify() {
-          this.page.url = slugify(this.page.title)
-      },
-      update() {
-          this.alerts.success = false
-          var formData = {
-              title: this.page.title,
-              content: this.page.content,
-              hidden: this.page.hidden,
-              url: this.page.url,
-              image: (this.$store.state.selectedImage == null) ? null : this.$store.state.selectedImage._id,
-              boxes: JSON.stringify(this.page.boxes)
+          this.page.boxes = res.data.boxes;
+
+          this.$store.commit(
+            "selectImage",
+            res.data.details.image ? res.data.details.image : null
+          );
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    removeBox(index) {
+      this.page.boxes.splice(index, 1);
+    },
+    addBox() {
+      this.page.boxes.push({
+        title: null,
+        content: null,
+        content_column: 3
+      });
+    },
+    slugify() {
+      this.page.url = slugify(this.page.title);
+    },
+    update() {
+      this.alerts.success = false;
+      var formData = {
+        title: this.page.title,
+        content: this.page.content,
+        hidden: this.page.hidden,
+        url: this.page.url,
+        image:
+          this.$store.state.selectedImage == null
+            ? null
+            : this.$store.state.selectedImage._id,
+        boxes: JSON.stringify(this.page.boxes)
+      };
+
+      this.axios
+        .put(this.api + "/pages/" + this.$route.params.id, formData)
+        .then(res => {
+          // console.log(res.data)
+          if (res.data.error == 0) {
+            this.alerts.success = true;
           }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    deletePage() {
+      this.axios
+        .post(this.api + "/pages/delete/" + this.$route.params.id)
+        .then(res => {
+          this.$router.push("/pages");
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    /*
+       * Statistics
+       */
+    getStat(days = 7) {
+      this.axios
+        .get(this.api + "/pages/" + this.$route.params.id + "/stat/" + days + "/number")
+        .then(res => {
+          // console.log(res);
+          this.statDate = res.data;
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    
+      this.axios
+        .get(this.api + "/pages/" + this.$route.params.id + "/stat/" + days + "/browser")
+        .then(res => {
+          // console.log(res);
+          this.statBrowser = res.data;
+        })
+        .catch(err => {
+          console.log(err);
+        });
 
-          this.axios.put(this.api + '/pages/' + this.$route.params.id, formData).then((res) => {
-              // console.log(res.data)
-              if( res.data.error == 0 )
-              {
-                  this.alerts.success = true
-              }
-          })
-          .catch((err) => {
-              console.log(err)
-          })
-      },
-      deletePage() {
-          this.axios.post(this.api + '/pages/delete/' + this.$route.params.id).then((res) => {
-              this.$router.push('/pages')
-          })
-          .catch((err) => {
-              console.log(err)
-          })
-      }
+        this.axios
+        .get(this.api + "/pages/" + this.$route.params.id + "/stat/" + days + "/os")
+        .then(res => {
+          // console.log(res);
+          this.statOs = res.data;
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    statModal() {
+      this.getStat();
+      this.$refs.statModal.show();
+    }
   }
-}
+};
 </script>

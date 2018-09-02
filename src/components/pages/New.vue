@@ -149,7 +149,6 @@ export default {
           }
 
           this.axios.post(this.api + '/pages', formData).then((res) => {
-              // console.log(res.data)
               if( res.data.error == 0 )
               {
                   //Clear selected image.
