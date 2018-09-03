@@ -81,18 +81,18 @@
                 <b-modal ref="statModal" title="Statistics" size="lg" hide-footer>
                     <div class="d-block">
                         <h5>Visitors</h5>
-                        <line-chart :data="statDate"></line-chart>
+                        <line-chart :data="statDate" :empty="{ empty: 'No data available.' }"></line-chart>
                     </div>
                     <b-container fluid>
                         <b-row>
                             <b-col cols="6">
                                 <h5>Browsers</h5>
-                                <pie-chart :data="statBrowser"></pie-chart>
+                                <pie-chart :data="statBrowser" :empty="{ empty: 'No data available.' }"></pie-chart>
                             </b-col>
 
                             <b-col cols="6">
-                                <h5>Operating Systems</h5>
-                                <pie-chart :data="statOs"></pie-chart>
+                                <h5>Platforms</h5>
+                                <pie-chart :data="statOs" :empty="{ empty: 'No data available.' }"></pie-chart>
                             </b-col>
                         </b-row>
                     </b-container>
@@ -238,7 +238,7 @@ export default {
         });
 
         this.axios
-        .get(this.api + "/pages/" + this.$route.params.id + "/stat/" + days + "/os")
+        .get(this.api + "/pages/" + this.$route.params.id + "/stat/" + days + "/platform")
         .then(res => {
           // console.log(res);
           this.statOs = res.data;
