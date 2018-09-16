@@ -10,7 +10,7 @@
                             <input type="text" class="form-control form-control-lg merriweather" v-model="title" placeholder="Title" v-on:keyup="slugify" />
                         </div>
                         <div class="form-group">
-                            <shimpuru v-model="content"></shimpuru>
+                            <markdown-editor v-model="content"></markdown-editor>
                         </div>
                     </div>
 
@@ -123,7 +123,6 @@
 <script>
 import Navigation from "../Navigation.vue";
 import ImagesWidget from "../widgets/Images.vue";
-import Shimpuru from '../widgets/shimpuru.vue';
 import markdownEditor from "vue-simplemde/src/markdown-editor";
 
 import slugify from "slugify";
@@ -133,8 +132,7 @@ export default {
   components: {
     Navigation,
     ImagesWidget,
-    Shimpuru,
-    markdownEditor,
+    markdownEditor
   },
   created() {
     this.getTags();
