@@ -3,13 +3,12 @@
         <b-row>
             <b-col>
                 <ul class="shimpuru-tools">
-                    <li><b-button block variant="secondary" title="Toggle Preview" v-on:click.prevent="togglePreview" v-b-tooltip.hover><i class="fas fa-eye"></i></b-button></li>
-                    <li><b-button block variant="primary" title="Bold" v-on:click.prevent="modifyText('bold')" v-b-tooltip.hover><i class="fas fa-bold"></i></b-button></li>
-                    <li><b-button block variant="primary" title="Italic" v-on:click.prevent="modifyText('italic')" v-b-tooltip.hover><i class="fas fa-italic"></i></b-button></li>
-                    <li><b-button block variant="primary" title="Strikethrough" v-on:click.prevent="modifyText('strikethrough')" v-b-tooltip.hover><i class="fas fa-strikethrough"></i></b-button></li>
-
-                    <li><b-button block variant="success" title="Image" v-on:click.prevent="modifyText('image')" v-b-tooltip.hover><i class="fas fa-image"></i></b-button></li>
-                    <li><b-button block variant="success" title="Link" v-on:click.prevent="modifyText('link')" v-b-tooltip.hover><i class="fas fa-link"></i></b-button></li>
+                    <li>
+                        <a href="#" title="Toggle Preview" v-on:click.prevent="togglePreview" v-b-tooltip.hover><i class="fas fa-eye"></i></a>
+                    </li>
+                    <li v-for="(data, key) in markdown" v-bind:key="key">
+                        <a href="#" :title="data.name" v-html="data.icon" v-on:click.prevent="modifyText(key)" v-b-tooltip.hover></a>
+                    </li>
                 </ul>
             </b-col>
 
@@ -37,21 +36,39 @@ export default {
                 input: true,
             },
             markdown: {
-                bold: '__{SELTEXT}__',
-                italic: '*{SELTEXT}*',
-                strikethrough: '~~{SELTEXT}~~',
+                bold: {
+                    name: 'Bold',
+                    icon: '<i class="fas fa-bold"></i>',
+                    template: '__{SELTEXT}__',
+                },
+                italic: {
+                    name: 'Italic',
+                    icon: '<i class="fas fa-italic"></i>',
+                    template: '*{SELTEXT}*',
+                },
+                strikethrough: {
+                    name: 'Strikethrough',
+                    icon: '<i class="fas fa-strikethrough"></i>',
+                    template: '~~{SELTEXT}~~',
+                },
 
-                link: '[{SELTEXT}](https://)',
-                image: '![{SELTEXT}](http://)',
-            }
+                link: {
+                    name: 'Link',
+                    icon: '<i class="fas fa-link"></i>',
+                    template: '[{SELTEXT}](http://)',
+                },
+                image: {
+                    name: 'Image',
+                    icon: '<i class="fas fa-image"></i>',
+                    template: '![{SELTEXT}](http://)',
+                },
+            },
         }
     },
     mounted() {
         document.getElementById('shimpuru-input').addEventListener('change', function() {
             this.$emit('input', this.value);
         }.bind(this));
-
-        window.addEventListener('mouseup', this.stopTrack);
     },
     computed: {
         marked() {
@@ -87,23 +104,23 @@ export default {
             let replacement = '';
             switch(type) {
                 case "bold":
-                replacement = this.replace(this.markdown.bold, selected);
+                replacement = this.replace(this.markdown.bold.template, selected);
                 break;
 
                 case "italic":
-                replacement = this.replace(this.markdown.italic, selected);
+                replacement = this.replace(this.markdown.italic.template, selected);
                 break;
 
                 case "strikethrough":
-                replacement = this.replace(this.markdown.strikethrough, selected);
+                replacement = this.replace(this.markdown.strikethrough.template, selected);
                 break;
 
                 case "image":
-                replacement = this.replace(this.markdown.image, (selected === "")? 'Alt Text' : selected);
+                replacement = this.replace(this.markdown.image.template, (selected === "")? 'Alt Text' : selected);
                 break;
 
                 case "link":
-                replacement = this.replace(this.markdown.link, (selected === "")? 'Link Text' : selected);
+                replacement = this.replace(this.markdown.link.template, (selected === "")? 'Link Text' : selected);
                 break;
             }
             // console.log(`Replacement: ${replacement} | ${input.value.length}`);
@@ -153,16 +170,42 @@ export default {
 
 .shimpuru-tools {
     list-style: none;
+    /* Text */
+    text-align: center;
     /* Margin & Padding */
     margin: 0;
-    padding: 10px;
+    padding: 0;
     /* Position */
     position: sticky;
     top: 0;
     left: 0;
+    /* Border */
+    border: 1px solid #e6e9ed;
+    /* Border Radius */
+    border-radius: 5px;
 }
 .shimpuru-tools > li {
+    /* Margin * Padding */
+    margin: 0;
+    padding: 0;
+    /* Border */
+    border-top: 1px solid #e6e9ed;
+}
+
+.shimpuru-tools > li:first-child {
+    /* Border */
+    border-top: none;
+}
+
+.shimpuru-tools > li > a {
+    display: block;
+    /* FOnt */
+    color: #434a54;
     /* Margin & Padding */
-    padding: 5px 0 5px 0;
+    padding: 10px;
+}
+
+.shimpuru-tools > li > a:hover {
+    background-color: #e6e9ed;
 }
 </style>
