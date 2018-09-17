@@ -43,7 +43,7 @@
 
                     <div class="col-md-12">
                         <div class="form-group">
-                            <shimpuru v-model="page.content"></shimpuru>
+                            <markdown-editor v-model="page.content"></markdown-editor>
                         </div>
                     </div>
                 </div>
@@ -84,7 +84,6 @@
 <script>
 import Navigation from '../Navigation.vue'
 import ImagesWidget from '../widgets/Images.vue'
-import Shimpuru from '../widgets/shimpuru.vue';
 import markdownEditor from 'vue-simplemde/src/markdown-editor'
 import draggable from 'vuedraggable'
 
@@ -95,7 +94,6 @@ export default {
   components: {
       Navigation,
       ImagesWidget,
-      Shimpuru,
       markdownEditor,
       draggable,
   },

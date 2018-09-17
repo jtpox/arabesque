@@ -10,7 +10,7 @@
                             <input type="text" class="form-control form-control-lg merriweather" v-model="title" placeholder="Title" v-on:keyup="slugify" />
                         </div>
                         <div class="form-group">
-                            <markdown-editor v-model="content"></markdown-editor>
+                            <shimpuru v-model="content"></shimpuru>
                         </div>
                     </div>
 
@@ -87,6 +87,7 @@
 <script>
 import Navigation from '../Navigation.vue'
 import ImagesWidget from '../widgets/Images.vue'
+import Shimpuru from '../widgets/shimpuru.vue';
 import markdownEditor from 'vue-simplemde/src/markdown-editor'
 
 import slugify from 'slugify'
@@ -96,6 +97,7 @@ export default {
   components: {
       Navigation,
       ImagesWidget,
+      Shimpuru,
       markdownEditor
   },
   created() {
@@ -139,10 +141,8 @@ export default {
               hidden: this.hidden,
               url: this.url
           }
-          // console.log(formData);
 
           this.axios.post(this.api + '/blog', formData).then((res) => {
-              // console.log(res)
               if (res.data.error == 0){
                  //Clear selected.
                 this.$store.commit('clearSelectedImage')

@@ -15,6 +15,11 @@
             <b-col md="11">
                 <textarea class="shimpuru-input" id="shimpuru-input" @input="change($event.target)" @focus="updateHeight($event.target)" :value="value" v-show="visible.input"></textarea>
                 <div class="shimpuru-display" v-html="marked" v-show="visible.display"></div>
+                <div class="text-right">
+                    <p>
+                        <small>Words: {{ wordCount }}</small>
+                    </p>
+                </div>
             </b-col>
         </b-row>
     </b-container>
@@ -73,6 +78,9 @@ export default {
     computed: {
         marked() {
             if (this.value) return Marked(this.value);
+        },
+        wordCount() {
+            if(this.value) return this.value.split(' ').length;
         }
     },
     methods: {
