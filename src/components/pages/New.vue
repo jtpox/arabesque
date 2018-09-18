@@ -3,50 +3,61 @@
         <Navigation></Navigation>
         <div class="col-md-10 main-content">
             <div class="container-fluid">
-                
-                <nav class="navbar navbar-expand-lg navbar-light bg-light page-toolbar">
-                    <div class="container-fluid">
-                        <span>
-                            <button type="button" class="btn btn-default" v-on:click.prevent="addBox()">Add Content Box</button>
-                            <b-btn v-b-modal="'imagesWidget'">Select Image</b-btn>
-                        </span>
-                        <span>
-                            <button type="button" class="btn btn-primary" v-on:click.prevent="page.hidden = !page.hidden">
-                                <i class="fas" v-bind:class="{ 'fa-eye': !page.hidden, 'fa-eye-slash': page.hidden }"></i> Page {{ (page.hidden) ? 'Hidden' : 'Viewable' }}
-                            </button>
-                            <button type="button" class="btn btn-success" v-on:click.prevent="publish()">Publish</button>
-                        </span>
-                    </div>
-                </nav>
-
                 <div class="row">
-                    <div v-bind:class="{ 'col-md-12': !selectedImage, 'col-md-9': selectedImage }">
-                        <div class="input-group input-group-lg form-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fas fa-heading"></i></span>
-                            </div>
-                            <input type="text" v-model="page.title" class="form-control merriweather" placeholder="Title" v-on:keyup="slugify" />
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <input type="text" v-model="page.title" class="form-control form-control-lg merriweather" placeholder="Page Title" v-on:keyup="slugify" />
                         </div>
-                        <div class="form-group input-group input-group-sm">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fas fa-link"></i></span>
-                            </div>
-                            <input type="text" class="form-control form-control-sm merriweather" v-model="page.url" placeholder="Page URL" />
-                        </div>
-                    </div>
-
-                    <div class="col-md-3" v-if="selectedImage">
-                        <div class="card">
-                            <img class="card-img-top img-fluid" :src="'/uploads/images/' + selectedImage.file_name" alt="Selected Image">
-                        </div>
-                    </div>
-
-                    <div class="col-md-12">
+                        
                         <div class="form-group">
                             <shimpuru v-model="page.content"></shimpuru>
                         </div>
                     </div>
+
+                    <div class="col-md-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <button type="button" class="btn btn-primary btn-lg btn-block" v-on:click.prevent="publish()">Publish</button>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">URL</h4>
+                                <input type="text" class="form-control form-control-lg merriweather" v-model="page.url" />
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <span v-if="selectedImage !== null">
+                                <img class="card-img-top img-fluid" :src="'/uploads/images/' + selectedImage.file_name" alt="Selected Image">
+                            </span>
+                            <div class="card-body">
+                                <h4 class="card-title">Image</h4>
+                                <p class="card-text">
+                                    <b-btn v-b-modal="'imagesWidget'" class="btn-block">Select Image</b-btn>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Options</h4>
+                                <button type="button" class="btn btn-primary btn-block" v-on:click.prevent="page.hidden = !page.hidden">
+                                    <i class="fas" v-bind:class="{ 'fa-eye': !page.hidden, 'fa-eye-slash': page.hidden }"></i> Page {{ (page.hidden) ? 'Hidden' : 'Viewable' }}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+                <nav class="navbar navbar-expand-lg navbar-light bg-light page-toolbar">
+                    <div class="container-fluid">
+                        <span>
+                            <button type="button" class="btn btn-default" v-on:click.prevent="addBox()">Add Content Box</button>
+                        </span>
+                    </div>
+                </nav>
 
                 <draggable v-model="page.boxes" class="row" :options="{ handle: '.movable' }">
                     <div v-for="(box, index) in page.boxes" :key="index" v-bind:class="'col-md-' + box.content_column">
@@ -74,17 +85,16 @@
                         </div>
                     </div>
                 </draggable>
-
-                <ImagesWidget></ImagesWidget>
             </div>
         </div>
+        <ImagesWidget></ImagesWidget>
     </div>
 </template>
 
 <script>
 import Navigation from '../Navigation.vue'
 import ImagesWidget from '../widgets/Images.vue'
-import Shimpuru from '../widgets/shimpuru.vue';
+import Shimpuru from '../widgets/Shimpuru.vue';
 import markdownEditor from 'vue-simplemde/src/markdown-editor'
 import draggable from 'vuedraggable'
 

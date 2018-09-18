@@ -13,7 +13,7 @@
             </b-col>
 
             <b-col md="11">
-                <textarea class="shimpuru-input" id="shimpuru-input" @input="change($event.target)" @focus="updateHeight($event.target)" :value="value" v-show="visible.input"></textarea>
+                <textarea class="shimpuru-input" id="shimpuru-input" @input="change($event.target)" @focus="updateHeight($event.target)" :value="value" v-show="visible.input" placeholder="Write your story here."></textarea>
                 <div class="shimpuru-display" v-html="marked" v-show="visible.display"></div>
                 <div class="text-right">
                     <p>
@@ -80,7 +80,12 @@ export default {
             if (this.value) return Marked(this.value);
         },
         wordCount() {
-            if(this.value) return this.value.split(' ').length;
+            // if(this.value) return this.value.split(' ').length;
+            if (this.value) {
+                return this.value.split(' ').length; 
+            } else {
+                return 0;
+            }
         }
     },
     methods: {
@@ -156,9 +161,11 @@ export default {
     resize: none;
     overflow: hidden;
     /* Margin & Padding */
-    padding: 0;
+    padding: 10px;
     /* Border */
-    border: 0;
+    border: 1px solid #e6e9ed;
+    /* Border Radius */
+    border-radius: 6px;
 }
 
 .shimpuru-display {
@@ -170,6 +177,8 @@ export default {
     height: auto;
     min-height: 100%;
     max-height: 100%;
+    /* Margin & Padding */
+    padding: 0;
     /* Font */
     font-family: 'Merriweather', serif;
     /* Position */
@@ -190,7 +199,7 @@ export default {
     /* Border */
     border: 1px solid #e6e9ed;
     /* Border Radius */
-    border-radius: 5px;
+    border-radius: 6px;
 }
 .shimpuru-tools > li {
     /* Margin * Padding */

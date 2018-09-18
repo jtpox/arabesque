@@ -7,7 +7,7 @@
 
                     <div class="col-md-10">
                         <div class="form-group">
-                            <input type="text" class="form-control form-control-lg merriweather" v-model="title" placeholder="Title" v-on:keyup="slugify" />
+                            <input type="text" class="form-control form-control-lg merriweather" v-model="title" placeholder="Post Title" v-on:keyup="slugify" />
                         </div>
                         <div class="form-group">
                             <shimpuru v-model="content"></shimpuru>
@@ -123,7 +123,7 @@
 <script>
 import Navigation from "../Navigation.vue";
 import ImagesWidget from "../widgets/Images.vue";
-import Shimpuru from '../widgets/shimpuru.vue';
+import Shimpuru from '../widgets/Shimpuru.vue';
 import markdownEditor from "vue-simplemde/src/markdown-editor";
 
 import slugify from "slugify";
