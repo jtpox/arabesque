@@ -12,6 +12,41 @@
                         <div class="form-group">
                             <shimpuru v-model="page.content"></shimpuru>
                         </div>
+
+                        <nav class="navbar navbar-expand-lg navbar-light bg-light page-toolbar">
+                            <div class="container-fluid">
+                                <span>
+                                    <button type="button" class="btn btn-default" v-on:click.prevent="addBox()">Add Content Box</button>
+                                </span>
+                            </div>
+                        </nav>
+
+                        <draggable v-model="page.boxes" class="row" :options="{ handle: '.movable' }">
+                            <div v-for="(box, index) in page.boxes" :key="index" v-bind:class="'col-md-' + box.content_column">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend movable">
+                                                <span class="input-group-text"><i class="fas fa-arrows-alt"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control merriweather" v-model="box.title" placeholder="Title" />
+                                            <div class="input-group-append">
+                                                <button type="button" class="btn btn-danger" v-on:click.prevent="removeBox(index)"><i class="far fa-trash-alt"></i></button>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <textarea class="form-control monaco" v-model="box.content" placeholder="Content"></textarea>
+                                            <small>Markdown is enabled.</small>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input type="number" class="form-control" v-model="box.content_column" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </draggable>
                     </div>
 
                     <div class="col-md-2">
@@ -24,7 +59,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">URL</h4>
-                                <input type="text" class="form-control form-control-lg merriweather" v-model="page.url" />
+                                <input type="text" class="form-control merriweather" v-model="page.url" />
                             </div>
                         </div>
 
@@ -51,40 +86,6 @@
                     </div>
                 </div>
 
-                <nav class="navbar navbar-expand-lg navbar-light bg-light page-toolbar">
-                    <div class="container-fluid">
-                        <span>
-                            <button type="button" class="btn btn-default" v-on:click.prevent="addBox()">Add Content Box</button>
-                        </span>
-                    </div>
-                </nav>
-
-                <draggable v-model="page.boxes" class="row" :options="{ handle: '.movable' }">
-                    <div v-for="(box, index) in page.boxes" :key="index" v-bind:class="'col-md-' + box.content_column">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend movable">
-                                        <span class="input-group-text"><i class="fas fa-arrows-alt"></i></span>
-                                    </div>
-                                    <input type="text" class="form-control merriweather" v-model="box.title" placeholder="Title" />
-                                    <div class="input-group-append">
-                                        <button type="button" class="btn btn-danger" v-on:click.prevent="removeBox(index)"><i class="far fa-trash-alt"></i></button>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <textarea class="form-control monaco" v-model="box.content" placeholder="Content"></textarea>
-                                    <small>Markdown is enabled.</small>
-                                </div>
-
-                                <div class="form-group">
-                                    <input type="number" class="form-control" v-model="box.content_column" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </draggable>
             </div>
         </div>
         <ImagesWidget></ImagesWidget>

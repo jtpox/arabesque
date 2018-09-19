@@ -13,7 +13,7 @@
             </b-col>
 
             <b-col md="11">
-                <textarea class="shimpuru-input" id="shimpuru-input" @input="change($event.target)" @focus="updateHeight($event.target)" :value="value" v-show="visible.input" placeholder="Write your story here."></textarea>
+                <div class="shimpuru-input" id="shimpuru-input" contenteditable="true" v-show="visible.input" @blur="change($event.target)" v-html="live"></div>
                 <div class="shimpuru-display" v-html="marked" v-show="visible.display"></div>
                 <div class="text-right">
                     <p>
@@ -25,6 +25,9 @@
     </b-container>
 </template>
 <script>
+/*
+ * This is just a test! I have no plans to finish this.
+ */
 import Showdown from 'showdown';
 import Marked from 'marked';
 import Turndown from 'turndown';
@@ -36,66 +39,116 @@ export default {
     },
     data() {
         return {
+            editor: null,
             visible: {
                 display: false,
                 input: true,
             },
             markdown: {
+                /* heading: {
+                    name: 'Heading',
+                    icon: '<i class="fas fa-heading"></i>',
+                    template: '# {SELTEXT}',
+                    find: '',
+                    replace: ''
+                }, */
                 bold: {
                     name: 'Bold',
                     icon: '<i class="fas fa-bold"></i>',
                     template: '__{SELTEXT}__',
+                    find: /(\*\*|__)(.*?)\1/g,
+                    replace: '__<strong>$2</strong>__',
                 },
                 italic: {
                     name: 'Italic',
                     icon: '<i class="fas fa-italic"></i>',
                     template: '*{SELTEXT}*',
+                    find: /(\*|_)(.*?)\1/g,
+                    replace: '*<em>$2</em>*',
                 },
                 strikethrough: {
                     name: 'Strikethrough',
                     icon: '<i class="fas fa-strikethrough"></i>',
                     template: '~~{SELTEXT}~~',
+                    find: '/\~\~(.*?)\~\~/g',
+                    replace: '<del>$1</del>',
                 },
 
                 link: {
                     name: 'Link',
                     icon: '<i class="fas fa-link"></i>',
                     template: '[{SELTEXT}](http://)',
+                    find: /\[([^\[]+)\]\(([^\)]+)\)/g,
+                    replace: '<a href="$2" target="_blank">[$1]($2)</a>',
                 },
                 image: {
                     name: 'Image',
                     icon: '<i class="fas fa-image"></i>',
                     template: '![{SELTEXT}](http://)',
+                    find: '',
+                    replace: '',
                 },
             },
         }
     },
     mounted() {
-        document.getElementById('shimpuru-input').addEventListener('change', function() {
-            this.$emit('input', this.value);
-        }.bind(this));
+        // this.$el.getElementsByClassName('shimpuru-input')[0].innerHTML = this.liveText(this.value);
+        // this.$el.getElementsByClassName('shimpuru-input')[0].innerHTML = this.liveText();
     },
     computed: {
         marked() {
+            // console.log(Marked(this.value));
             if (this.value) return Marked(this.value);
         },
-        wordCount() {
+        live() {
+            // console.log(this.content);
             if (this.value) {
-                return this.value.trim().split(/\s+/).length
+                console.log(this.value);
+                let replacement = this.value;
+                for (var mark in this.markdown) {
+                    replacement = replacement.replace(this.markdown[mark].find, this.markdown[mark].replace);
+                    // console.log(replacement);
+                }
+                replacement = ('\n' + replacement + '\n').replace(/\n([^\n]+)/g, '\n\n<p>$1</p>\n\n');
+                console.log(replacement);
+                return replacement;
+            }
+        },
+        wordCount() {
+            // if(this.value) return this.value.split(' ').length;
+            if (this.value) {
+                return this.value.split(' ').length; 
             } else {
                 return 0;
             }
         }
     },
+    watch: {
+        /*value() {
+            console.log(this.value);
+            this.$el.getElementsByClassName('shimpuru-input')[0].innerHTML = this.liveText();
+            return this.liveText();
+        }*/
+    },
     methods: {
+        /*liveText() {
+            if (this.value) {
+                let replacement = this.value;
+                for (var mark in this.markdown) {
+                    replacement = replacement.replace(this.markdown[mark].find, this.markdown[mark].replace);
+                    // console.log(replacement);
+                }
+                console.log(replacement);
+                return replacement;
+            }
+        },*/
         change(target) {
             // this.input.style.height = (this.input.scrollHeight) + 'px';
-            this.updateHeight(target);
-            this.$emit('input', target.value);
-        },
-        updateHeight(target) {
-            target.style.height = '5px';
-            target.style.height = target.scrollHeight + 'px';
+            // this.updateHeight(target);
+            // console.log(target.innerText);
+            // this.$el.getElementsByClassName('shimpuru-input')[0].innerHTML = this.liveText(this.value);
+            // this.content = target.innerText;
+            this.$emit('input', target.innerText);
         },
         togglePreview() {
             if (this.visible.display) {
@@ -107,6 +160,7 @@ export default {
             }
         },
         modifyText(type) {
+            console.log(window.getSelection().anchorOffset);
             const input = document.getElementById('shimpuru-input');
             const start = input.selectionStart;
             const end   = input.selectionEnd;
@@ -156,7 +210,7 @@ export default {
     height: auto;
 }
 .shimpuru-input {
-    min-height: 300px;
+    min-height: 500px;
     resize: none;
     overflow: hidden;
     /* Margin & Padding */

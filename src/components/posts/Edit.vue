@@ -29,7 +29,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <p class="card-text">
-                                    <button type="button" class="btn btn-info btn-lg btn-block" v-on:click.prevent="statModal"><i class="fas fa-chart-pie"></i> Statistics</button>
+                                    <button type="button" class="btn btn-info btn-block" v-on:click.prevent="statModal">Stats</button>
                                 </p>
                             </div>
                         </div>
@@ -233,6 +233,7 @@ export default {
         .catch(err => {
           console.log(err);
         });
+        console.log(this.content);
     },
     delete_post() {
       this.axios
