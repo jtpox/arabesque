@@ -59,7 +59,7 @@
 
                         <div class="card">
                             <div class="card-body">
-                                <button type="button" class="btn btn-info btn-block" v-on:click.prevent="statModal">Stats</button>
+                                <Stats v-bind:page="$route.params.id"></Stats>
                             </div>
                         </div>
 
@@ -127,6 +127,7 @@
 import Navigation from "../Navigation.vue";
 import ImagesWidget from "../widgets/Images.vue";
 import Shinpuru from '../widgets/Shinpuru.vue';
+import Stats from '../widgets/Stats.vue';
 import markdownEditor from "vue-simplemde/src/markdown-editor";
 import draggable from "vuedraggable";
 
@@ -138,6 +139,7 @@ export default {
     Navigation,
     ImagesWidget,
     Shinpuru,
+    Stats,
     markdownEditor,
     draggable
   },
@@ -161,9 +163,6 @@ export default {
       alerts: {
         success: false
       },
-      statDate: [],
-      statBrowser: [],
-      statOs: [],
     };
   },
   methods: {
@@ -236,44 +235,6 @@ export default {
           console.log(err);
         });
     },
-    /*
-       * Statistics
-       */
-    getStat(days = 7) {
-      this.axios
-        .get(this.api + "/pages/" + this.$route.params.id + "/stat/" + days + "/number")
-        .then(res => {
-          // console.log(res);
-          this.statDate = res.data;
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    
-      this.axios
-        .get(this.api + "/pages/" + this.$route.params.id + "/stat/" + days + "/browser")
-        .then(res => {
-          // console.log(res);
-          this.statBrowser = res.data;
-        })
-        .catch(err => {
-          console.log(err);
-        });
-
-        this.axios
-        .get(this.api + "/pages/" + this.$route.params.id + "/stat/" + days + "/platform")
-        .then(res => {
-          // console.log(res);
-          this.statOs = res.data;
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    },
-    statModal() {
-      this.getStat();
-      this.$refs.statModal.show();
-    }
   }
 };
 </script>

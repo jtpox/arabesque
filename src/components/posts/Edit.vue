@@ -28,9 +28,7 @@
 
                         <div class="card">
                             <div class="card-body">
-                                <p class="card-text">
-                                    <button type="button" class="btn btn-info btn-block" v-on:click.prevent="statModal">Stats</button>
-                                </p>
+                                <Stats v-bind:post="$route.params.id"></Stats>
                             </div>
                         </div>
 
@@ -98,25 +96,6 @@
         </div>
 
         <ImagesWidget></ImagesWidget>
-        <b-modal ref="statModal" title="Statistics" size="lg" hide-footer>
-            <div class="d-block">
-                <h5>Visitors</h5>
-                <line-chart :data="statDate" :empty="{ empty: 'No data available.' }"></line-chart>
-            </div>
-            <b-container fluid>
-                <b-row>
-                    <b-col cols="6">
-                        <h5>Browsers</h5>
-                        <pie-chart :data="statBrowser" :empty="{ empty: 'No data available.' }"></pie-chart>
-                    </b-col>
-                        
-                    <b-col cols="6">
-                        <h5>Platforms</h5>
-                        <pie-chart :data="statOs" :empty="{ empty: 'No data available.' }"></pie-chart>
-                    </b-col>
-                </b-row>
-            </b-container>
-        </b-modal>
     </div>
 </template>
 
@@ -124,6 +103,7 @@
 import Navigation from "../Navigation.vue";
 import ImagesWidget from "../widgets/Images.vue";
 import Shinpuru from '../widgets/Shinpuru.vue';
+import Stats from '../widgets/Stats.vue';
 import markdownEditor from "vue-simplemde/src/markdown-editor";
 
 import slugify from "slugify";
@@ -134,6 +114,7 @@ export default {
     Navigation,
     ImagesWidget,
     Shinpuru,
+    Stats,
     markdownEditor,
   },
   created() {
@@ -153,9 +134,6 @@ export default {
 
       success: false,
       error: false,
-      statDate: [],
-      statBrowser: [],
-      statOs: []
     };
   },
   computed: {
@@ -247,41 +225,6 @@ export default {
           console.log(err);
         });
     },
-    getStat(days = 7) {
-        this.axios
-        .get(this.api + "/blog/" + this.$route.params.id + "/stat/" + days + "/number")
-        .then(res => {
-          // console.log(res);
-          this.statDate = res.data;
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    
-      this.axios
-        .get(this.api + "/blog/" + this.$route.params.id + "/stat/" + days + "/browser")
-        .then(res => {
-          // console.log(res);
-          this.statBrowser = res.data;
-        })
-        .catch(err => {
-          console.log(err);
-        });
-
-        this.axios
-        .get(this.api + "/blog/" + this.$route.params.id + "/stat/" + days + "/platform")
-        .then(res => {
-          // console.log(res);
-          this.statOs = res.data;
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    },
-    statModal() {
-      this.getStat();
-      this.$refs.statModal.show();
-    }
   }
 };
 </script>
