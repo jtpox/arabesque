@@ -14,8 +14,8 @@
                             <a href="#" class="list-group-item" v-for="(link, index) in links" :key="index" v-on:click.prevent="editLink(index)">
                                 <div class="justify-content-between">
                                     <h5><span class="badge badge-danger movable"><i class="fas fa-arrows-alt-v"></i></span> {{ link.title }}</h5>
-                                    <small v-if="link.link">Link: {{ link.link }}</small>
-                                    <small v-if="link.page">Page: {{ link.page.title }}</small>
+                                    <small v-if="link.link !== undefined">Link: {{ link.link }}</small>
+                                    <small v-if="link.page !== undefined">Page: {{ translatePage(link.page).title }}</small>
                                 </div>
                             </a>
                         </draggable>
@@ -50,7 +50,8 @@
                                         <input type="text" class="form-control" placeholder="URL" v-show="edit.selection == 1" v-model="edit.link" />
 
                                         <select v-model="edit.page" class="form-control" v-show="edit.selection == 2">
-                                            <option v-for="(page, index) in pages" :key="index" :value="index">{{ page.title }}</option>
+                                            <option :value="translatePage(edit.page)._id" selected v-show="edit.page">{{ translatePage(edit.page).title }}</option>
+                                            <option v-for="(page, index) in pages" :value="page._id" v-if="!(translatePage(edit.page)._id == page._id)">{{ page.title }}</option>
                                         </select>
                                     </div>
 
@@ -80,7 +81,7 @@
                                         <input type="text" class="form-control" placeholder="URL" v-show="add.selection == 1" v-model="add.link" />
 
                                         <select v-model="add.page" class="form-control" v-show="add.selection == 2">
-                                            <option v-for="(page, index) in pages" :key="page._id" :value="index">{{ page.title }}</option>
+                                            <option v-for="(page, index) in pages" :key="page._id" :value="page._id">{{ page.title }}</option>
                                         </select>
                                     </div>
 
@@ -142,7 +143,20 @@ export default {
         .get(this.api + "/nav")
         .then(res => {
           // console.log(res.data)
-          this.links = res.data;
+          // this.links = res.data;
+          res.data.forEach((item, index) => {
+              if (item.page) {
+                  this.links.push({
+                      title: item.title,
+                      page: item.page._id
+                  });
+              } else {
+                  this.links.push({
+                      title: item.title,
+                      link: item.link,
+                  });
+              }
+          });
         })
         .catch(err => {
           console.log(err);
@@ -158,6 +172,16 @@ export default {
           console.log(err);
         });
     },
+    translatePage(id) {
+        let page = '';
+        this.pages.forEach((item, index) => {
+            if (item._id === id) {
+                page = item;
+            }
+        });
+        // console.log(page);
+        return page;
+    },
     addLink() {
       if (this.add.selection == 1) {
         this.links.push({
@@ -167,34 +191,40 @@ export default {
       } else if(this.add.selection == 2) {
         this.links.push({
             title: this.add.title,
-            page: this.pages[this.add.page]
+            page: this.add.page
         })
         //console.log(this.pages[this.add.page])
       }
 
       // Clear inputs
-        this.add.title = null
-        this.add.link = null
-        this.add.page = null
+      this.add.title = null
+      this.add.link = null
+      this.add.page = null
     },
     editLink(index) {
         this.edit.index = index
         this.edit.title = this.links[index].title
+        // console.log(this.links[index]);
         
         if (this.links[index].link){
             this.edit.selection = 1
             this.edit.link = this.links[index].link
         } else if(this.links[index].page) {
             this.edit.selection = 2
+            this.edit.page = this.links[index].page;
         }
     },
     changeEdit(index) {
-        this.links[index].title = this.edit.title
-        //console.log(this.links[index])
         if (this.edit.selection == 1){
-            this.links[index].link = this.edit.link
+            this.$set(this.links, index, {
+                title: this.edit.title,
+                link: this.edit.link,
+            });
         } else if(this.edit.selection == 2) {
-            this.links[index].page = this.pages[this.edit.page]
+            this.$set(this.links, index, {
+                title: this.edit.title,
+                page: this.edit.page,
+            });
         }
     },
     deleteLink(index) {
@@ -208,23 +238,7 @@ export default {
         this.links.splice(index, 1)
     },
     saveChanges() {
-        var data = []
-        console.log(this.links)
-        for (var i = 0; i < this.links.length; i++){
-            if (this.links[i].page){
-                data.push({
-                    title: this.links[i].title,
-                    page: this.links[i].page._id,
-                })
-            } else if(this.links[i].link) {
-                data.push({
-                    title: this.links[i].title,
-                    link: this.links[i].link,
-                })
-            }
-        }
-
-        this.axios.post(this.api + '/nav', { nav: JSON.stringify(data) }).then((res) => {
+        this.axios.post(this.api + '/nav', { nav: JSON.stringify(this.links) }).then((res) => {
             if (res.data.error == 0){
                 this.alerts.update.success = true;
             } else {
