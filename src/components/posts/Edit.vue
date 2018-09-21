@@ -56,8 +56,7 @@
                             <div class="card-body">
                                 <h4 class="card-title">Schedule</h4>
                                 <p class="card-text">
-                                    <small>Original Schedule: {{ original_schedule.toLocaleDateString() }}</small>
-                                    <input type="date" class="form-control" v-model="schedule" />
+                                    <input type="date" class="form-control" v-model="schedule" v-b-tooltip.focus v-bind:title="'Original Schedule: ' + originalSchedule" />
                                 </p>
                             </div>
                         </div>
@@ -106,6 +105,7 @@ import Shinpuru from '../widgets/Shinpuru.vue';
 import Stats from '../widgets/Stats.vue';
 import markdownEditor from "vue-simplemde/src/markdown-editor";
 
+import moment from 'moment';
 import slugify from "slugify";
 
 export default {
@@ -139,6 +139,10 @@ export default {
   computed: {
     selectedImage() {
       return this.$store.state.selectedImage;
+    },
+    originalSchedule() {
+        // console.log(this.original_schedule);
+        return moment(this.original_schedule).format('MM/DD/YYYY');
     }
   },
   methods: {
@@ -160,8 +164,9 @@ export default {
           this.title = res.data[0].title;
           this.content = res.data[0].content;
           this.selected_tag = res.data[0].tag._id;
-          this.schedule = new Date(res.data[0].created_at);
-          this.original_schedule = new Date(res.data[0].created_at);
+          // this.schedule = new Date(res.data[0].created_at);
+          this.original_schedule = res.data[0].created_at;
+          this.schedule = moment(res.data[0].created_at).format('YYYY-MM-DD');
           this.hidden = res.data[0].hidden;
           this.url = res.data[0].url;
 
