@@ -1,8 +1,8 @@
 <template>
-    <b-container fluid class="shimpuru-container">
+    <b-container fluid class="shinpuru-container">
         <b-row>
             <b-col>
-                <ul class="shimpuru-tools">
+                <ul class="shinpuru-tools">
                     <li>
                         <a href="#" title="Toggle Preview" v-on:click.prevent="togglePreview" v-b-tooltip.hover><i class="fas fa-eye"></i></a>
                     </li>
@@ -13,8 +13,8 @@
             </b-col>
 
             <b-col md="11">
-                <div class="shimpuru-input" id="shimpuru-input" contenteditable="true" v-show="visible.input" @blur="change($event.target)" v-html="live"></div>
-                <div class="shimpuru-display" v-html="marked" v-show="visible.display"></div>
+                <div class="shinpuru-input" id="shinpuru-input" contenteditable="true" v-show="visible.input" @blur="change($event.target)" v-html="live"></div>
+                <div class="shinpuru-display" v-html="marked" v-show="visible.display"></div>
                 <div class="text-right">
                     <p>
                         <small>Words: {{ wordCount }}</small>
@@ -33,7 +33,7 @@ import Marked from 'marked';
 import Turndown from 'turndown';
 
 export default {
-    name: 'Shimpuru',
+    name: 'shinpuru',
     props: {
         value: String,
     },
@@ -92,8 +92,8 @@ export default {
         }
     },
     mounted() {
-        // this.$el.getElementsByClassName('shimpuru-input')[0].innerHTML = this.liveText(this.value);
-        // this.$el.getElementsByClassName('shimpuru-input')[0].innerHTML = this.liveText();
+        // this.$el.getElementsByClassName('shinpuru-input')[0].innerHTML = this.liveText(this.value);
+        // this.$el.getElementsByClassName('shinpuru-input')[0].innerHTML = this.liveText();
     },
     computed: {
         marked() {
@@ -126,7 +126,7 @@ export default {
     watch: {
         /*value() {
             console.log(this.value);
-            this.$el.getElementsByClassName('shimpuru-input')[0].innerHTML = this.liveText();
+            this.$el.getElementsByClassName('shinpuru-input')[0].innerHTML = this.liveText();
             return this.liveText();
         }*/
     },
@@ -146,7 +146,7 @@ export default {
             // this.input.style.height = (this.input.scrollHeight) + 'px';
             // this.updateHeight(target);
             // console.log(target.innerText);
-            // this.$el.getElementsByClassName('shimpuru-input')[0].innerHTML = this.liveText(this.value);
+            // this.$el.getElementsByClassName('shinpuru-input')[0].innerHTML = this.liveText(this.value);
             // this.content = target.innerText;
             this.$emit('input', target.innerText);
         },
@@ -161,7 +161,7 @@ export default {
         },
         modifyText(type) {
             console.log(window.getSelection().anchorOffset);
-            const input = document.getElementById('shimpuru-input');
+            const input = document.getElementById('shinpuru-input');
             const start = input.selectionStart;
             const end   = input.selectionEnd;
             const selected = input.value.substring(start, end);
@@ -205,11 +205,11 @@ export default {
 }
 </script>
 <style>
-.shimpuru-input, .shimpuru-display {
+.shinpuru-input, .shinpuru-display {
     width: 100%;
     height: auto;
 }
-.shimpuru-input {
+.shinpuru-input {
     min-height: 500px;
     resize: none;
     overflow: hidden;
@@ -221,11 +221,11 @@ export default {
     border-radius: 6px;
 }
 
-.shimpuru-display {
+.shinpuru-display {
     background-color: #f5f4fa;
 }
 
-.shimpuru-container {
+.shinpuru-container {
     width: 100%;
     height: auto;
     min-height: 100%;
@@ -238,7 +238,7 @@ export default {
     position: relative;
 }
 
-.shimpuru-tools {
+.shinpuru-tools {
     list-style: none;
     /* Text */
     text-align: center;
@@ -254,7 +254,7 @@ export default {
     /* Border Radius */
     border-radius: 6px;
 }
-.shimpuru-tools > li {
+.shinpuru-tools > li {
     /* Margin * Padding */
     margin: 0;
     padding: 0;
@@ -262,12 +262,12 @@ export default {
     border-top: 1px solid #e6e9ed;
 }
 
-.shimpuru-tools > li:first-child {
+.shinpuru-tools > li:first-child {
     /* Border */
     border-top: none;
 }
 
-.shimpuru-tools > li > a {
+.shinpuru-tools > li > a {
     display: block;
     /* FOnt */
     color: #434a54;
@@ -275,7 +275,7 @@ export default {
     padding: 10px;
 }
 
-.shimpuru-tools > li > a:hover {
+.shinpuru-tools > li > a:hover {
     background-color: #e6e9ed;
 }
 </style>

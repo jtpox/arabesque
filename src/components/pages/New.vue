@@ -10,7 +10,7 @@
                         </div>
                         
                         <div class="form-group">
-                            <shimpuru v-model="page.content"></shimpuru>
+                            <shinpuru v-model="page.content"></shinpuru>
                         </div>
 
                         <nav class="navbar navbar-expand-lg navbar-light bg-light page-toolbar">
@@ -95,7 +95,7 @@
 <script>
 import Navigation from '../Navigation.vue'
 import ImagesWidget from '../widgets/Images.vue'
-import Shimpuru from '../widgets/Shimpuru.vue';
+import Shinpuru from '../widgets/Shinpuru.vue';
 import markdownEditor from 'vue-simplemde/src/markdown-editor'
 import draggable from 'vuedraggable'
 
@@ -106,7 +106,7 @@ export default {
   components: {
       Navigation,
       ImagesWidget,
-      Shimpuru,
+      Shinpuru,
       markdownEditor,
       draggable,
   },

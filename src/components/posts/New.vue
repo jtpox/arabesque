@@ -10,7 +10,7 @@
                             <input type="text" class="form-control form-control-lg merriweather" v-model="title" placeholder="Post Title" v-on:keyup="slugify" />
                         </div>
                         <div class="form-group">
-                            <shimpuru v-model="content"></shimpuru>
+                            <shinpuru v-model="content"></shinpuru>
                         </div>
                     </div>
 
@@ -67,11 +67,11 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Options</h4>
-                                <p class="card-text">
-                                    <label>
-                                        <input type="checkbox" v-model="hidden" /> Hidden Post
-                                    </label>
-                                </p>
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-primary btn-block" v-on:click.prevent="hidden = !hidden">
+                                        <i class="fas" v-bind:class="{ 'fa-eye': !hidden, 'fa-eye-slash': hidden }"></i> Post {{ (hidden) ? 'Hidden' : 'Viewable' }}
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -87,7 +87,7 @@
 <script>
 import Navigation from '../Navigation.vue'
 import ImagesWidget from '../widgets/Images.vue'
-import Shimpuru from '../widgets/Shimpuru.vue';
+import Shinpuru from '../widgets/Shinpuru.vue';
 import markdownEditor from 'vue-simplemde/src/markdown-editor'
 
 import slugify from 'slugify'
@@ -97,7 +97,7 @@ export default {
   components: {
       Navigation,
       ImagesWidget,
-      Shimpuru,
+      Shinpuru,
       markdownEditor
   },
   created() {

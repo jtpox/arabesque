@@ -1,8 +1,8 @@
 <template>
-    <b-container fluid class="shimpuru-container">
+    <b-container fluid class="shinpuru-container">
         <b-row>
             <b-col>
-                <ul class="shimpuru-tools">
+                <ul class="shinpuru-tools">
                     <li>
                         <a href="#" title="Toggle Preview" v-on:click.prevent="togglePreview" v-b-tooltip.hover><i class="fas fa-eye"></i></a>
                     </li>
@@ -13,8 +13,8 @@
             </b-col>
 
             <b-col md="11">
-                <textarea class="shimpuru-input" id="shimpuru-input" @input="change($event.target)" @focus="updateHeight($event.target)" :value="value" v-show="visible.input" placeholder="Write your story here."></textarea>
-                <div class="shimpuru-display" v-html="marked" v-show="visible.display"></div>
+                <textarea class="shinpuru-input" id="shinpuru-input" @input="change($event.target)" @focus="updateHeight($event.target)" :value="value" v-show="visible.input" placeholder="Write your story here."></textarea>
+                <div class="shinpuru-display" v-html="marked" v-show="visible.display"></div>
                 <div class="text-right">
                     <p>
                         <small>Words: {{ wordCount }}</small>
@@ -30,7 +30,7 @@ import Marked from 'marked';
 import Turndown from 'turndown';
 
 export default {
-    name: 'Shimpuru',
+    name: 'shinpuru',
     props: {
         value: String,
     },
@@ -71,7 +71,7 @@ export default {
         }
     },
     mounted() {
-        document.getElementById('shimpuru-input').addEventListener('change', function() {
+        document.getElementById('shinpuru-input').addEventListener('change', function() {
             this.$emit('input', this.value);
         }.bind(this));
     },
@@ -107,7 +107,7 @@ export default {
             }
         },
         modifyText(type) {
-            const input = document.getElementById('shimpuru-input');
+            const input = document.getElementById('shinpuru-input');
             const start = input.selectionStart;
             const end   = input.selectionEnd;
             const selected = input.value.substring(start, end);
@@ -151,11 +151,11 @@ export default {
 }
 </script>
 <style>
-.shimpuru-input, .shimpuru-display {
+.shinpuru-input, .shinpuru-display {
     width: 100%;
     height: auto;
 }
-.shimpuru-input {
+.shinpuru-input {
     min-height: 300px;
     resize: none;
     overflow: hidden;
@@ -167,11 +167,11 @@ export default {
     border-radius: 6px;
 }
 
-.shimpuru-display {
+.shinpuru-display {
     background-color: #f5f4fa;
 }
 
-.shimpuru-container {
+.shinpuru-container {
     width: 100%;
     height: auto;
     min-height: 100%;
@@ -184,7 +184,7 @@ export default {
     position: relative;
 }
 
-.shimpuru-tools {
+.shinpuru-tools {
     list-style: none;
     /* Text */
     text-align: center;
@@ -193,14 +193,14 @@ export default {
     padding: 0;
     /* Position */
     position: sticky;
-    top: 0;
-    left: 0;
+    top: 10px;
+    left: 10px;
     /* Border */
     border: 1px solid #e6e9ed;
     /* Border Radius */
     border-radius: 6px;
 }
-.shimpuru-tools > li {
+.shinpuru-tools > li {
     /* Margin * Padding */
     margin: 0;
     padding: 0;
@@ -208,12 +208,12 @@ export default {
     border-top: 1px solid #e6e9ed;
 }
 
-.shimpuru-tools > li:first-child {
+.shinpuru-tools > li:first-child {
     /* Border */
     border-top: none;
 }
 
-.shimpuru-tools > li > a {
+.shinpuru-tools > li > a {
     display: block;
     /* FOnt */
     color: #434a54;
@@ -221,7 +221,7 @@ export default {
     padding: 10px;
 }
 
-.shimpuru-tools > li > a:hover {
+.shinpuru-tools > li > a:hover {
     background-color: #e6e9ed;
 }
 </style>
