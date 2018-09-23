@@ -27,7 +27,7 @@ Vue.config.productionTip = false;
 
 Vue.use(BootstrapVue);
 Vue.use(VueAxios, axios);
-Vue.use(VueSimplemde);
+// Vue.use(VueSimplemde);
 Vue.use(VueChartkick, { adapter: Chart });
 
 Vue.filter("formatDate", value => {

@@ -114,7 +114,7 @@
 </template>
 
 <script>
-import markdownEditor from "vue-simplemde/src/markdown-editor";
+// import markdownEditor from "vue-simplemde/src/markdown-editor";
 import slugify from "slugify";
 import Navigation from "../Navigation.vue";
 import ImagesWidget from "../widgets/Images.vue";
@@ -125,8 +125,8 @@ export default {
   components: {
     Navigation,
     ImagesWidget,
-    Shinpuru,
-    markdownEditor
+    Shinpuru
+    // markdownEditor
   },
   data() {
     return {

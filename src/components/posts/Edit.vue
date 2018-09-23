@@ -136,7 +136,7 @@
 </template>
 
 <script>
-import markdownEditor from "vue-simplemde/src/markdown-editor";
+// import markdownEditor from "vue-simplemde/src/markdown-editor";
 import moment from "moment";
 import slugify from "slugify";
 import Navigation from "../Navigation.vue";
@@ -150,8 +150,8 @@ export default {
     Navigation,
     ImagesWidget,
     Shinpuru,
-    Stats,
-    markdownEditor
+    Stats
+    // markdownEditor
   },
   data() {
     return {

@@ -136,7 +136,7 @@
 </template>
 
 <script>
-import markdownEditor from "vue-simplemde/src/markdown-editor";
+// import markdownEditor from "vue-simplemde/src/markdown-editor";
 import draggable from "vuedraggable";
 import slugify from "slugify";
 import Navigation from "../Navigation.vue";
@@ -149,7 +149,7 @@ export default {
     Navigation,
     ImagesWidget,
     Shinpuru,
-    markdownEditor,
+    // markdownEditor,
     draggable
   },
   data() {
