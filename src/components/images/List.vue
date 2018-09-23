@@ -9,6 +9,13 @@
             <div class="page-header">
               <h1>Images</h1>
             </div>
+
+            <div
+              v-show="images.length < 1"
+              class="alert alert-warning">
+              No images.
+            </div>
+
             <div class="table-responsive">
               <table class="table table-hover">
                 <thead>

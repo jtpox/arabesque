@@ -11,6 +11,13 @@
                 :to="{ name: 'NewPage' }" 
                 class="btn btn-primary btn-sm">New Page</router-link></h1>
             </div>
+
+            <div
+              v-show="pages.length < 1"
+              class="alert alert-warning">
+              No pages yet.
+            </div>
+
             <div class="list-group list-group-flush">
               <router-link 
                 v-for="page in pages" 

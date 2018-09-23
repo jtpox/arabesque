@@ -50,7 +50,7 @@ Vue.mixin({
     return {
       get api() {
         return "/api";
-        // return "http://localhost:8081/api";
+        // return "http://localhost:8080/api";
       }
     };
   }

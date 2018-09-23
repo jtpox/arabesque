@@ -9,6 +9,13 @@
             <div class="page-header">
               <h1>Tags</h1>
             </div>
+
+            <div
+              v-show="tags.length < 1"
+              class="alert alert-warning">
+              No tags yet.
+            </div>
+
             <div class="list-group list-group-flush">
               <a 
                 v-for="(tag, index) in tags" 

@@ -20,6 +20,9 @@
 
             <nav class="navbar navbar-expand-lg navbar-light bg-light page-toolbar">
               <div class="container-fluid">
+                <b-navbar-brand href="#">
+                  Content Editor
+                </b-navbar-brand>
                 <span>
                   <button 
                     type="button" 

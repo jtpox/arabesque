@@ -10,6 +10,12 @@
               <h1>Navigation</h1>
             </div>
 
+            <div
+              v-show="links.length < 1"
+              class="alert alert-warning">
+              Navigation is empty.
+            </div>
+
             <draggable 
               v-model="links" 
               :options="{ handle: '.movable' }" 

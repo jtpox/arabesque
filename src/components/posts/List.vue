@@ -11,6 +11,13 @@
                 :to="{ name: 'NewPost' }" 
                 class="btn btn-primary btn-sm">New Post</router-link></h1>
             </div>
+
+            <div
+              v-show="posts.length < 1"
+              class="alert alert-warning">
+              No posts yet.
+            </div>
+
             <div class="list-group list-group-flush">
               <router-link 
                 v-for="post in posts" 
