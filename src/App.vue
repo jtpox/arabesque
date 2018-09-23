@@ -8,21 +8,22 @@
 
 <script>
 export default {
-  name: 'App',
+  name: "App",
   data() {
-    return {
-    }
+    return {};
   },
   computed: {
     isAuthenticated() {
-      return this.$store.state.isAuthenticated
+      return this.$store.state.isAuthenticated;
     },
     currentUser() {
-      return this.$store.state.currentUser
+      return this.$store.state.currentUser;
     }
   }
-}
+};
 </script>
 
-<style src="./assets/css/ribbon.css"></style>
-<style src="./assets/css/simplemde.min.css"></style>
+<style src="./assets/css/ribbon.css">
+</style>
+<style src="./assets/css/simplemde.min.css">
+</style>

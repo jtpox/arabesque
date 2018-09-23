@@ -1,0 +1,17 @@
+{
+    "env": {
+        "browser": true,
+        "es6": true,
+        "node": true
+    },
+     "parserOptions": {
+         "parser": "babel-eslint"
+     },
+    "extends": [
+        "plugin:vue/recommended",
+        "plugin:prettier/recommended"
+    ],
+    "rules": {
+        "linebreak-style": 0
+    }
+}

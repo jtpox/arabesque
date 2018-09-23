@@ -1,112 +1,148 @@
 <template>
-    <div class="row no-gutters wrapper">
-        <Navigation></Navigation>
-        <div class="col-md-10 main-content">
-            <div class="container-fluid">
-                <div class="row">
+  <div class="row no-gutters wrapper">
+    <Navigation/>
+    <div class="col-md-10 main-content">
+      <div class="container-fluid">
+        <div class="row">
 
-                    <div class="col-md-10">
-                        <div class="form-group">
-                            <input type="text" class="form-control form-control-lg merriweather" v-model="title" placeholder="Post Title" v-on:keyup="slugify" />
-                        </div>
-                        <div class="form-group">
-                            <shinpuru v-model="content"></shinpuru>
-                        </div>
-                    </div>
-
-                    <div class="col-md-2">
-                        <div class="alert alert-success text-center" v-show="success"><i class="far fa-thumbs-up"></i></div>
-                        <div class="alert alert-danger text-center" v-show="error">Error updating.</div>
-
-                        <div class="card">
-                            <div class="card-body">
-                                <p class="card-text">
-                                    <button type="button" class="btn btn-success btn-lg btn-block" v-on:click="update()">Update</button>
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="card">
-                            <div class="card-body">
-                                <Stats v-bind:post="$route.params.id"></Stats>
-                            </div>
-                        </div>
-
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">URL</h4>
-                                <p class="card-text">
-                                    <input type="text" class="form-control" v-model="url" />
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Tag</h4>
-                                <p class="card-text">
-                                    <select v-model="selected_tag" class="form-control">
-                                        <option v-for="tag in tags" :value="tag._id" :key="tag._id">{{ tag.title }}</option>
-                                    </select>
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Schedule</h4>
-                                <p class="card-text">
-                                    <input type="date" class="form-control" v-model="schedule" v-b-tooltip.focus v-bind:title="'Original Schedule: ' + originalSchedule" />
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="card">
-                            <span v-if="selectedImage !== null">
-                                <img class="card-img-top img-fluid" :src="'/uploads/images/' + selectedImage.file_name" alt="Selected Image">
-                            </span>
-                            <div class="card-body">
-                                <h4 class="card-title">Image</h4>
-                                <p class="card-text">
-                                    <b-btn v-b-modal="'imagesWidget'" class="btn-block">Select Image</b-btn>
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Options</h4>
-                                <p class="card-text">
-                                    <div class="form-group">
-                                        <button type="button" class="btn btn-primary btn-block" v-on:click.prevent="hidden = !hidden">
-                                            <i class="fas" v-bind:class="{ 'fa-eye': !hidden, 'fa-eye-slash': hidden }"></i> Post {{ (hidden) ? 'Hidden' : 'Viewable' }}
-                                        </button>
-                                    </div>
-                                    <div class="form-group">
-                                        <button type="button" class="btn btn-danger btn-block" v-on:click="delete_post()">Delete Post</button>
-                                    </div>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+          <div class="col-md-10">
+            <div class="form-group">
+              <input 
+                v-model="title" 
+                type="text" 
+                class="form-control form-control-lg merriweather" 
+                placeholder="Post Title" 
+                @keyup="slugify" >
             </div>
-        </div>
+            <div class="form-group">
+              <shinpuru v-model="content"/>
+            </div>
+          </div>
 
-        <ImagesWidget></ImagesWidget>
+          <div class="col-md-2">
+            <div 
+              v-show="success" 
+              class="alert alert-success text-center"><i class="far fa-thumbs-up"/></div>
+            <div 
+              v-show="error" 
+              class="alert alert-danger text-center">Error updating.</div>
+
+            <div class="card">
+              <div class="card-body">
+                <p class="card-text">
+                  <button 
+                    type="button" 
+                    class="btn btn-success btn-lg btn-block" 
+                    @click="update()">Update</button>
+                </p>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-body">
+                <Stats :post="$route.params.id"/>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">URL</h4>
+                <p class="card-text">
+                  <input 
+                    v-model="url" 
+                    type="text" 
+                    class="form-control" >
+                </p>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">Tag</h4>
+                <p class="card-text">
+                  <select 
+                    v-model="selected_tag" 
+                    class="form-control">
+                    <option 
+                      v-for="tag in tags" 
+                      :value="tag._id" 
+                      :key="tag._id">{{ tag.title }}</option>
+                  </select>
+                </p>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">Schedule</h4>
+                <p class="card-text">
+                  <input 
+                    v-b-tooltip.focus 
+                    v-model="schedule" 
+                    :title="'Original Schedule: ' + originalSchedule" 
+                    type="date" 
+                    class="form-control" >
+                </p>
+              </div>
+            </div>
+
+            <div class="card">
+              <span v-if="selectedImage !== null">
+                <img 
+                  :src="'/uploads/images/' + selectedImage.file_name" 
+                  class="card-img-top img-fluid" 
+                  alt="Selected Image">
+              </span>
+              <div class="card-body">
+                <h4 class="card-title">Image</h4>
+                <p class="card-text">
+                  <b-btn 
+                    v-b-modal="'imagesWidget'" 
+                    class="btn-block">Select Image</b-btn>
+                </p>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">Options</h4>
+                <p class="card-text"/><div class="form-group">
+                  <button 
+                    type="button" 
+                    class="btn btn-primary btn-block" 
+                    @click.prevent="hidden = !hidden">
+                    <i 
+                      :class="{ 'fa-eye': !hidden, 'fa-eye-slash': hidden }" 
+                      class="fas"/> Post {{ (hidden) ? 'Hidden' : 'Viewable' }}
+                  </button>
+                </div>
+                <div class="form-group">
+                  <button 
+                    type="button" 
+                    class="btn btn-danger btn-block" 
+                    @click="delete_post()">Delete Post</button>
+                </div>
+                                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
     </div>
+
+    <ImagesWidget/>
+  </div>
 </template>
 
 <script>
+import markdownEditor from "vue-simplemde/src/markdown-editor";
+import moment from "moment";
+import slugify from "slugify";
 import Navigation from "../Navigation.vue";
 import ImagesWidget from "../widgets/Images.vue";
-import Shinpuru from '../widgets/Shinpuru.vue';
-import Stats from '../widgets/Stats.vue';
-import markdownEditor from "vue-simplemde/src/markdown-editor";
-
-import moment from 'moment';
-import slugify from "slugify";
+import Shinpuru from "../widgets/Shinpuru.vue";
+import Stats from "../widgets/Stats.vue";
 
 export default {
   name: "EditPost",
@@ -115,11 +151,7 @@ export default {
     ImagesWidget,
     Shinpuru,
     Stats,
-    markdownEditor,
-  },
-  created() {
-    this.getTags();
-    this.getPost();
+    markdownEditor
   },
   data() {
     return {
@@ -133,7 +165,7 @@ export default {
       url: null,
 
       success: false,
-      error: false,
+      error: false
     };
   },
   computed: {
@@ -141,14 +173,18 @@ export default {
       return this.$store.state.selectedImage;
     },
     originalSchedule() {
-        // console.log(this.original_schedule);
-        return moment(this.original_schedule).format('MM/DD/YYYY');
+      // console.log(this.original_schedule);
+      return moment(this.original_schedule).format("MM/DD/YYYY");
     }
+  },
+  created() {
+    this.getTags();
+    this.getPost();
   },
   methods: {
     getTags() {
       this.axios
-        .get(this.api + "/tags")
+        .get(`${this.api}/tags`)
         .then(res => {
           this.tags = res.data;
         })
@@ -158,7 +194,7 @@ export default {
     },
     getPost() {
       this.axios
-        .get(this.api + "/blog/" + this.$route.params.id)
+        .get(`${this.api}/blog/${this.$route.params.id}`)
         .then(res => {
           // console.log(res.data)
           this.title = res.data[0].title;
@@ -166,7 +202,7 @@ export default {
           this.selected_tag = res.data[0].tag._id;
           // this.schedule = new Date(res.data[0].created_at);
           this.original_schedule = res.data[0].created_at;
-          this.schedule = moment(res.data[0].created_at).format('YYYY-MM-DD');
+          this.schedule = moment(res.data[0].created_at).format("YYYY-MM-DD");
           this.hidden = res.data[0].hidden;
           this.url = res.data[0].url;
 
@@ -186,7 +222,7 @@ export default {
       this.error = false;
       this.success = false;
 
-      let formData = {
+      const formData = {
         title: this.title,
         content: this.content,
         tag: this.selected_tag,
@@ -201,7 +237,7 @@ export default {
       // console.log(formData);
 
       this.axios
-        .put(this.api + "/blog/" + this.$route.params.id, formData)
+        .put(`${this.api}/blog/${this.$route.params.id}`, formData)
         .then(res => {
           // console.log(res)
           if (res.data.error == 0) {
@@ -216,11 +252,11 @@ export default {
         .catch(err => {
           console.log(err);
         });
-        console.log(this.content);
+      console.log(this.content);
     },
     delete_post() {
       this.axios
-        .post(this.api + "/blog/delete/" + this.$route.params.id)
+        .post(`${this.api}/blog/delete/${this.$route.params.id}`)
         .then(res => {
           if (res.data.error == 0) {
             this.$router.push("/posts");
@@ -229,7 +265,7 @@ export default {
         .catch(err => {
           console.log(err);
         });
-    },
+    }
   }
 };
 </script>

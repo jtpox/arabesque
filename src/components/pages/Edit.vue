@@ -1,137 +1,194 @@
 <template>
-    <div class="row no-gutters wrapper">
-        <Navigation></Navigation>
-        <div class="col-md-10 main-content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-10">
-                        <div class="form-group">
-                            <input type="text" v-model="page.title" class="form-control form-control-lg merriweather" placeholder="Page Title" v-on:keyup="slugify" />
-                        </div>
+  <div class="row no-gutters wrapper">
+    <Navigation/>
+    <div class="col-md-10 main-content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-10">
+            <div class="form-group">
+              <input 
+                v-model="page.title" 
+                type="text" 
+                class="form-control form-control-lg merriweather" 
+                placeholder="Page Title" 
+                @keyup="slugify" >
+            </div>
                         
-                        <div class="form-group">
-                            <shinpuru v-model="page.content"></shinpuru>
-                        </div>
+            <div class="form-group">
+              <shinpuru v-model="page.content"/>
+            </div>
 
-                        <nav class="navbar navbar-expand-lg navbar-light bg-light page-toolbar">
-                            <div class="container-fluid">
-                                <span>
-                                    <button type="button" class="btn btn-default" v-on:click.prevent="addBox()">Add Content Box</button>
-                                </span>
-                            </div>
-                        </nav>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light page-toolbar">
+              <div class="container-fluid">
+                <span>
+                  <button 
+                    type="button" 
+                    class="btn btn-default" 
+                    @click.prevent="addBox()">Add Content Box</button>
+                </span>
+              </div>
+            </nav>
 
-                        <draggable v-model="page.boxes" class="row" :options="{ handle: '.movable' }">
-                            <div v-for="(box, index) in page.boxes" :key="index" v-bind:class="'col-md-' + box.content_column">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend movable">
-                                                <span class="input-group-text"><i class="fas fa-arrows-alt"></i></span>
-                                            </div>
-                                            <input type="text" class="form-control merriweather" v-model="box.title" placeholder="Title" />
-                                            <div class="input-group-append">
-                                                <button type="button" class="btn btn-danger" v-on:click.prevent="removeBox(index)"><i class="far fa-trash-alt"></i></button>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <textarea class="form-control monaco" v-model="box.content" placeholder="Content"></textarea>
-                                            <small>Markdown is enabled.</small>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <input type="number" class="form-control" v-model="box.content_column" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </draggable>
+            <draggable 
+              v-model="page.boxes" 
+              :options="{ handle: '.movable' }" 
+              class="row">
+              <div 
+                v-for="(box, index) in page.boxes" 
+                :key="index" 
+                :class="'col-md-' + box.content_column">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend movable">
+                        <span class="input-group-text"><i class="fas fa-arrows-alt"/></span>
+                      </div>
+                      <input 
+                        v-model="box.title" 
+                        type="text" 
+                        class="form-control merriweather" 
+                        placeholder="Title" >
+                      <div class="input-group-append">
+                        <button 
+                          type="button" 
+                          class="btn btn-danger" 
+                          @click.prevent="removeBox(index)"><i class="far fa-trash-alt"/></button>
+                      </div>
                     </div>
 
-                    <div class="col-md-2">
-                        <div class="alert alert-success text-center" v-show="alerts.success"><i class="far fa-thumbs-up"></i></div>
-                        <div class="card">
-                            <div class="card-body">
-                                <button type="button" class="btn btn-success btn-lg btn-block" v-on:click.prevent="update()">Update</button>
-                            </div>
-                        </div>
-
-                        <div class="card">
-                            <div class="card-body">
-                                <Stats v-bind:page="$route.params.id"></Stats>
-                            </div>
-                        </div>
-
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">URL</h4>
-                                <input type="text" class="form-control merriweather" v-model="page.url" />
-                            </div>
-                        </div>
-
-                        <div class="card">
-                            <span v-if="selectedImage !== null">
-                                <img class="card-img-top img-fluid" :src="'/uploads/images/' + selectedImage.file_name" alt="Selected Image">
-                            </span>
-                            <div class="card-body">
-                                <h4 class="card-title">Image</h4>
-                                <p class="card-text">
-                                    <b-btn v-b-modal="'imagesWidget'" class="btn-block">Select Image</b-btn>
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Options</h4>
-                                <div class="form-group">
-                                    <button type="button" class="btn btn-primary btn-block" v-on:click.prevent="page.hidden = !page.hidden">
-                                        <i class="fas" v-bind:class="{ 'fa-eye': !page.hidden, 'fa-eye-slash': page.hidden }"></i> {{ (page.hidden) ? 'Hidden' : 'Viewable' }}
-                                    </button>
-                                </div>
-                                <div class="form-group">
-                                    <button type="button" class="btn btn-danger btn-block" v-on:click.prevent="deletePage()">Delete Page</button>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="form-group">
+                      <textarea 
+                        v-model="box.content" 
+                        class="form-control monaco" 
+                        placeholder="Content"/>
+                      <small>Markdown is enabled.</small>
                     </div>
+
+                    <div class="form-group">
+                      <input 
+                        v-model="box.content_column" 
+                        type="number" 
+                        class="form-control" >
+                    </div>
+                  </div>
                 </div>
+              </div>
+            </draggable>
+          </div>
 
+          <div class="col-md-2">
+            <div 
+              v-show="alerts.success" 
+              class="alert alert-success text-center"><i class="far fa-thumbs-up"/></div>
+            <div class="card">
+              <div class="card-body">
+                <button 
+                  type="button" 
+                  class="btn btn-success btn-lg btn-block" 
+                  @click.prevent="update()">Update</button>
+              </div>
             </div>
+
+            <div class="card">
+              <div class="card-body">
+                <Stats :page="$route.params.id"/>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">URL</h4>
+                <input 
+                  v-model="page.url" 
+                  type="text" 
+                  class="form-control merriweather" >
+              </div>
+            </div>
+
+            <div class="card">
+              <span v-if="selectedImage !== null">
+                <img 
+                  :src="'/uploads/images/' + selectedImage.file_name" 
+                  class="card-img-top img-fluid" 
+                  alt="Selected Image">
+              </span>
+              <div class="card-body">
+                <h4 class="card-title">Image</h4>
+                <p class="card-text">
+                  <b-btn 
+                    v-b-modal="'imagesWidget'" 
+                    class="btn-block">Select Image</b-btn>
+                </p>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">Options</h4>
+                <div class="form-group">
+                  <button 
+                    type="button" 
+                    class="btn btn-primary btn-block" 
+                    @click.prevent="page.hidden = !page.hidden">
+                    <i 
+                      :class="{ 'fa-eye': !page.hidden, 'fa-eye-slash': page.hidden }" 
+                      class="fas"/> {{ (page.hidden) ? 'Hidden' : 'Viewable' }}
+                  </button>
+                </div>
+                <div class="form-group">
+                  <button 
+                    type="button" 
+                    class="btn btn-danger btn-block" 
+                    @click.prevent="deletePage()">Delete Page</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <ImagesWidget></ImagesWidget>
-        <b-modal ref="statModal" title="Statistics" size="lg" hide-footer>
-            <div class="d-block">
-                <h5>Visitors</h5>
-                <line-chart :data="statDate" :empty="{ empty: 'No data available.' }"></line-chart>
-            </div>
-            <b-container fluid>
-                <b-row>
-                    <b-col cols="6">
-                        <h5>Browsers</h5>
-                        <pie-chart :data="statBrowser" :empty="{ empty: 'No data available.' }"></pie-chart>
-                    </b-col>
-                    
-                    <b-col cols="6">
-                        <h5>Platforms</h5>
-                        <pie-chart :data="statOs" :empty="{ empty: 'No data available.' }"></pie-chart>
-                    </b-col>
-                </b-row>
-            </b-container>
-        </b-modal>
+
+      </div>
     </div>
+    <ImagesWidget/>
+    <b-modal 
+      ref="statModal" 
+      title="Statistics" 
+      size="lg" 
+      hide-footer>
+      <div class="d-block">
+        <h5>Visitors</h5>
+        <line-chart 
+          :data="statDate" 
+          :empty="{ empty: 'No data available.' }"/>
+      </div>
+      <b-container fluid>
+        <b-row>
+          <b-col cols="6">
+            <h5>Browsers</h5>
+            <pie-chart 
+              :data="statBrowser" 
+              :empty="{ empty: 'No data available.' }"/>
+          </b-col>
+                    
+          <b-col cols="6">
+            <h5>Platforms</h5>
+            <pie-chart 
+              :data="statOs" 
+              :empty="{ empty: 'No data available.' }"/>
+          </b-col>
+        </b-row>
+      </b-container>
+    </b-modal>
+  </div>
 </template>
 
 <script>
-import Navigation from "../Navigation.vue";
-import ImagesWidget from "../widgets/Images.vue";
-import Shinpuru from '../widgets/Shinpuru.vue';
-import Stats from '../widgets/Stats.vue';
 import markdownEditor from "vue-simplemde/src/markdown-editor";
 import draggable from "vuedraggable";
-
 import slugify from "slugify";
+import Navigation from "../Navigation.vue";
+import ImagesWidget from "../widgets/Images.vue";
+import Shinpuru from "../widgets/Shinpuru.vue";
+import Stats from "../widgets/Stats.vue";
 
 export default {
   name: "EditPage",
@@ -142,14 +199,6 @@ export default {
     Stats,
     markdownEditor,
     draggable
-  },
-  created() {
-    this.getPage();
-  },
-  computed: {
-    selectedImage() {
-      return this.$store.state.selectedImage;
-    }
   },
   data() {
     return {
@@ -162,13 +211,21 @@ export default {
       },
       alerts: {
         success: false
-      },
+      }
     };
+  },
+  computed: {
+    selectedImage() {
+      return this.$store.state.selectedImage;
+    }
+  },
+  created() {
+    this.getPage();
   },
   methods: {
     getPage() {
       this.axios
-        .get(this.api + "/pages/" + this.$route.params.id)
+        .get(`${this.api}/pages/${this.$route.params.id}`)
         .then(res => {
           this.page.title = res.data.details.title;
           this.page.content = res.data.details.description;
@@ -201,7 +258,7 @@ export default {
     },
     update() {
       this.alerts.success = false;
-      var formData = {
+      const formData = {
         title: this.page.title,
         content: this.page.content,
         hidden: this.page.hidden,
@@ -214,7 +271,7 @@ export default {
       };
 
       this.axios
-        .put(this.api + "/pages/" + this.$route.params.id, formData)
+        .put(`${this.api}/pages/${this.$route.params.id}`, formData)
         .then(res => {
           // console.log(res.data)
           if (res.data.error == 0) {
@@ -227,14 +284,14 @@ export default {
     },
     deletePage() {
       this.axios
-        .post(this.api + "/pages/delete/" + this.$route.params.id)
+        .post(`${this.api}/pages/delete/${this.$route.params.id}`)
         .then(res => {
           this.$router.push("/pages");
         })
         .catch(err => {
           console.log(err);
         });
-    },
+    }
   }
 };
 </script>
