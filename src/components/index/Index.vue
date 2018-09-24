@@ -9,7 +9,7 @@
         </small>
         <h1 class="diavlo text-center">
           <a
-            href="https://github.com/jtpox/arabesque"
+            href="https://ribbon.jtpox.com"
             target="_blank">
             ribbon
           </a>
