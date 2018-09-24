@@ -23,7 +23,6 @@ export default {
 };
 </script>
 
-<style src="./assets/css/ribbon.css">
-</style>
-<style src="./assets/css/simplemde.min.css">
+<style lang="scss">
+@import "assets/scss/ribbon.scss";
 </style>

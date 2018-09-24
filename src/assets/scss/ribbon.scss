@@ -4,8 +4,8 @@
 
 @import "functions";
 @import "variables";
-@import url('bootstrap.css');
-@import url('fontawesome-all.min.css');
+@import "bootstrap";
+@import "assets/css/fontawesome-all.min.css";
 
 @import url('https://fonts.googleapis.com/css?family=Merriweather:300,400,700|Raleway:300,400');
 
@@ -212,14 +212,14 @@ a, a:link, a:visited, a:hover {
  */
 .footer a, .footer a:link, .footer a:visited {
     /* Font */
-    color: $gray-600;
+    color: $black;
 }
 
 .footer a:hover {
     /* Font */
     text-decoration: none;
     /* Border */
-    border-bottom: 1px solid $gray-600;
+    border-bottom: 1px solid $black;
 }
 
 /*
@@ -243,7 +243,7 @@ a, a:link, a:visited, a:hover {
 /* A font by Jos Buivenga (exljbris) -> www.exljbris.com */
 @font-face {
     font-family: Diavlo;
-    src: url('../webfonts/diavlo/Diavlo_BOOK_II_37.otf');
+    src: url('assets/webfonts/diavlo/Diavlo_BOOK_II_37.otf');
 }
 
 .diavlo {
