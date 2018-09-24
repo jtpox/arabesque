@@ -95,7 +95,7 @@ export default {
     searches() {
       if (this.search !== "") {
         const results = [];
-        const regex = new RegExp(this.search, "g");
+        const regex = new RegExp(this.search.toLowerCase(), "g");
         // console.log(regex.toString());
         this.posts.forEach((item, index) => {
           // console.log(item.title.search(this.search));
