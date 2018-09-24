@@ -113,7 +113,7 @@
                     @click.prevent="hidden = !hidden">
                     <i 
                       :class="{ 'fa-eye': !hidden, 'fa-eye-slash': hidden }" 
-                      class="fas"/> Post {{ (hidden) ? 'Hidden' : 'Viewable' }}
+                      class="fas"/> {{ (hidden) ? 'Hidden' : 'Viewable' }}
                   </button>
                 </div>
                 <div class="form-group">
