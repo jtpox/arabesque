@@ -16,7 +16,7 @@
         </h1>
         <div 
           v-show="error" 
-          class="alert alert-danger">
+          class="login-fail">
           Error authenticating.
         </div>
         <form @submit.prevent="login">
@@ -27,9 +27,7 @@
               name="email" 
               class="form-input" 
               placeholder="Email" >
-          </div>
 
-          <div class="form-group">
             <input 
               v-model="password" 
               type="password" 
@@ -38,12 +36,10 @@
               placeholder="Password" >
           </div>
 
-          <div class="form-group">
-            <button 
-              type="submit" 
-              name="login" 
-              class="btn btn-login float-right">Log In</button>
-          </div>
+          <button 
+            type="submit" 
+            name="login" 
+            class="btn btn-login float-right">Log In</button>
         </form>
       </div>
     </div>
