@@ -1,7 +1,7 @@
 <template>
-  <div class="row no-gutters wrapper">
+  <div class="wrapper">
     <Navigation/>
-    <div class="col-md-10 main-content">
+    <div class="main-content">
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-9">

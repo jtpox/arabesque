@@ -1,7 +1,7 @@
 <template>
-  <div class="row no-gutters wrapper">
+  <div class="wrapper">
     <Navigation/>
-    <div class="col-md-10 main-content">
+    <div class="main-content">
       <div class="container-fluid">
         <div class="row text-center">
           <div class="col-md-6 offset-md-3">
@@ -24,7 +24,7 @@
             </div>
           </div>
           <div class="col-md-6 offset-md-3">
-            <h4>A heartfelt thanks and <i class="fas fa-heart"/> for using ribbon</h4>
+            <h4>A heartfelt thanks and <font-awesome-icon icon="heart" /> for using ribbon</h4>
             <p>
               <a 
                 href="https://ribbon.jtpox.com/" 

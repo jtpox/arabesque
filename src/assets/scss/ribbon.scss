@@ -5,257 +5,340 @@
 @import "functions";
 @import "variables";
 @import "bootstrap";
-@import "assets/css/fontawesome-all.min.css";
 
-@import url('https://fonts.googleapis.com/css?family=Merriweather:300,400,700|Raleway:300,400');
+@import url("https://fonts.googleapis.com/css?family=Merriweather:300,400,700|Raleway:300,400");
 
-html, body {
-    height: 100%;
+html,
+body {
+  height: 100%;
+}
+
+a,
+a:link,
+a:visited,
+a:hover {
+  transition: ease-in-out 0.3s;
 }
 
 h1, h2, h3, h4, h5 {
-    /* Font */
-    font-family: 'Raleway', sans-serif;
-    font-weight: 300;
+  /* Font */
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
 }
 
-a, a:link, a:visited, a:hover {
-    /* Transition */
-    transition: 0.2s ease-in-out; 
+body {
+  background: url("assets/pexels-photo-360912_blur.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  /* Font */
+  color: $white;
 }
 
-.wrapper,  #app {
-    height: 100%;
+.wrapper {
+  background: inherit;
 }
 
-.card {
-    /* Margin & Padding */
-    margin-bottom: 20px;
+.wrapper,
+#app {
+  height: 100%;
 }
 
-/*
- * Main Navigation
- */
-.wrapper .main-nav {
-    background-color: $gray-900;
-    overflow-y: auto;
-    /* Font */
-    color: $white;
+.sidebar {
+  background: rgba(60, 59, 61, 0.2);
+  width: 220px;
+  /* Margin & Padding */
+  padding: 20px 0 20px 0;
 }
 
-.main-nav .logo {
-    background-color: $black;
-    overflow: auto;
-    /* Font */
-    font-family: 'Raleway', sans-serif;
-    font-weight: 300;
-    text-align: center;
-    /* Margin & Padding */
-    padding: 10px;
+@media only screen and (min-width: 768px) {
+  .wrapper {
+    /* Display */
+    display: -ms-flexbox;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-box;
+    display: box;
+    /* Flex */
+    -ms-flex-direction: row;
+    -webkit-box-orient: horizontal;
+    -moz-box-orient: horizontal;
+    -ms-box-orient: horizontal;
+    box-orient: horizontal;
+  }
+
+  .sidebar {
+    /* Flex */
+    -ms-flex: 0 220px;
+    -webkit-box-flex: 0;
+    -moz-box-flex: 0;
+    -ms-box-flex: 0;
+    box-flex: 0;
+  }
+
+  .vert-nav {
+    display: block !important;
+  }
+
+  .main-content {
+    /* Flex */
+    -ms-flex: 1;
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    -ms-box-flex: 1;
+    box-flex: 1;
+  }
 }
 
-.main-nav .logo a, .main-nav .logo a:link, .main-nav .logo a:visited, .main-nav .logo a:hover {
-    /* Font */
-    color: $white;
-    text-decoration: none;
-}
-
-.main-nav .vert-nav {
-    /* Margin & Padding */
-    padding: 0;
-}
-
-.main-nav .vert-nav .heading {
-    background-color: $black;
-    /* Font */
-    font-family: 'Raleway', sans-serif;
-    font-weight: 300;
-    /* Margin & Padding */
-    padding: 5px 10px 5px 10px;
-    /* Border */
-    border-bottom: 1px solid $gray-800;
-}
-
-.profile-container {
-    /* Position */
-    position: relative;
-}
-
-.main-nav .vert-nav .profile-heading {
-    background-color: $purple;
-    background: $purple;
+@media only screen and (max-width: 767px) {
+  .main-content {
     width: 100%;
-    /* Font */
-    font-family: 'Raleway', sans-serif;
-    font-weight: 300;
-    text-align: left;
-    /* Position */
-    position: relative;
-    /* Margin & Padding */
-    padding: 10px;
-    /* Border */
-    border: none;
-    /* Border Radius */
-    border-radius: 0;
+  }
+
+  .sidebar {
+    width: 100%;
+  }
+
+  .vert-nav {
+    display: none;
+  }
 }
 
-.main-nav .vert-nav .profile-heading:after {
-    content: '\f078';
-    /* Font */
-    font-family: 'Font Awesome 5 Free';
-    font-weight: 900;
-    /* Position */
-    position: absolute;
-    right: 10px;
-    top: 10px;
-}
-
-.vert-nav ul {
-    list-style: none;
-    /* Margin & Padding */
-    margin: 0;
-    padding: 0;
-}
-
-.vert-nav ul > li {
-    /* Border */
-    border-bottom: 1px solid $gray-800;
-    /*  Margin & Padding */
-    margin: 0;
-    padding: 0;
-}
-
-.vert-nav ul > li > a, .vert-nav ul > li > a:link, .vert-nav ul > li > a:visited {
-    display: block;
-    /* Position */
-    position: relative;
-    /* Font */
-    color: $white;
-    /* Margin & Padding */
-    padding: 10px;
-}
-
-.vert-nav ul > li > a:hover {
-    background-color: $gray-800;
-    /* Font */
-    text-decoration: none;
-}
-
-.vert-nav ul > li > a:after {
-    content: '\f105';
-    /* Font */
-    font-family: 'Font Awesome 5 Free';
-    font-weight: 900;
-    /* Position */
-    position: absolute;
-    right: 10px;
-    top: 10px;
-}
-
-.vert-nav ul > li > a.current, .vert-nav ul > li > a:link.current, .vert-nav ul > li > a:visited.current, .vert-nav ul > li > a:hover.current {
-    background-color: $white;
-    /* Font */
-    color: $black;
-}
-
-@media screen and (max-width: 767px) {
-    .vert-nav {
-        display: none;
-    }
-}
-
-@media screen and (min-width: 786px) {
-    .vert-nav {
-        display: block !important;
-    }
+.main-content {
+  max-height: 100%;
+  overflow-y: scroll;
+  /* Margin & Padding */
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 /*
- * Main Content
+ * Sidebar
  */
-.wrapper .main-content {
-    height: 100%;
-    overflow-y: auto;
-    /* Margin & Padding */
-    padding-top: 20px;
-    padding-bottom: 20px;
+.sidebar .logo {
+  overflow: auto;
+  /* Font */
+  font-weight: 300;
+  text-align: center;
+  /* Margin & Padding */
+  padding: 10px 25px 10px 25px;
+}
+
+.sidebar .logo a, .sidebar .logo a:link, .sidebar .logo a:visited, .sidebar .logo a:hover {
+  /* Font */
+  color: $white;
+  text-decoration: none;
+}
+
+.sidebar .vert-nav ul {
+  list-style: none;
+  /* Margin & Padding */
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar .vert-nav ul li a,
+.sidebar .vert-nav ul li a:link,
+.sidebar .vert-nav ul li a:visited {
+  display: block;
+  /* Font */
+  color: $white;
+  text-decoration: none;
+  /* Margin & Padding */
+  padding: 10px 25px 10px 25px;
+}
+
+.sidebar .vert-nav ul li a:hover,
+.sidebar .vert-nav ul li a.current,
+.sidebar .vert-nav ul li a.current:link,
+.sidebar .vert-nav ul li a.current:visited,
+.sidebar .vert-nav ul li a.current:hover {
+  background: rgba(245, 247, 250, 0.2);
+}
+
+.sidebar .vert-nav .heading {
+  background: rgba(60, 59, 61, 0.5);
+  /* Margin & Padding */
+  padding: 10px 25px 10px 25px;
+}
+
+.sidebar .vert-nav .profile-heading {
+  background: rgba(106, 80, 167, 0.3);
+  width: 100%;
+  /* Position */
+  position: relative;
+  /* Font */
+  color: $white;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+  text-align: left;
+  /* Margin & Padding */
+  padding: 10px 25px 10px 25px;
+  /* Border */
+  border: none;
 }
 
 /*
- * SimpleMDE
+ * Inputs
  */
-.markdown-editor {
-    /* Font */
-    font-family: 'Monaco', courier, monospace;
+.form-control {
+  background: rgba(245, 247, 250, 0.2);
+  /* Font */
+  color: $white;
+  /* Border */
+  border-width: 0 0 1px 0;
+  /* Transition */
+  transition: background 0.3s, border 0.3s;
 }
 
-.editor-preview, .editor-preview h1, .editor-preview h2, .editor-preview h3, .editor-preview h4, .editor-preview h5 {
-    /* Font */
-    font-family: 'Merriweather', serif;
+.form-control:active,
+.form-control:focus {
+  background: rgba(245, 247, 250, 0.2);
+  /* Font */
+  color: $white;
+  /* Border */
+  border-color: #6a50a7;
+  /* Shadow */
+  box-shadow: none;
+}
+
+.form-control::placeholder {
+  opacity: 1;
+  /* Font */
+  color: $gray-100;
+}
+
+.form-control:-ms-input-placeholder {
+  /* Font */
+  color: $gray-100;
+}
+
+.form-control::-ms-input-placeholder {
+  /* Font */
+  color: $gray-100;
 }
 
 /*
- * Page Editor
+ * List Group
+ */
+.list-group {
+  background: rgba(245, 247, 250, 0.2);
+}
+
+.list-group .list-group-item {
+  background: none;
+  /* Border */
+  border-color: $gray-100;
+}
+
+/*
+ * Card
+ */
+.card {
+  background: rgba(245, 247, 250, 0.2);
+  /* Border */
+  border-width: 0;
+  /* Margin & Padding */
+  margin-bottom: 10px;
+}
+
+/*
+ * Buttons
+ */
+.btn {
+  /* Border */
+  border-width: 0;
+}
+
+.btn-primary {
+  background: rgba(59, 175, 218, 0.5);
+}
+
+.btn-secondary {
+  background: rgba(128, 128, 128, 0.5);
+}
+
+.btn-success {
+  background:rgba(140, 193, 82, 0.5);
+  /* Font */
+  color: $white;
+}
+
+.btn-info {
+  background: rgba(55, 188, 155, 0.5);
+}
+
+.btn-warning {
+  background: rgba(247, 187, 66, 0.5);
+}
+
+.btn-danger {
+  background: rgba(218, 68, 83, 0.5);
+}
+
+.btn-light {
+  background: rgba(245, 247, 250, 0.5);
+}
+
+.btn-dark {
+  background: rgba(67, 74, 84, 0.5);
+}
+
+/*
+ * Navbar
  */
 .page-toolbar {
-    /* Margin & Padding */
-    margin-bottom: 20px;
-}
-
-.movable {
-    /* Cursor */
-    cursor: move;
+  background: rgba(245, 247, 250, 0.2);
+  /* Margin & Padding */
+  padding: 10px;
+  margin-bottom: 20px;
 }
 
 /*
- * Footer
+ * Modal
  */
-.footer a, .footer a:link, .footer a:visited {
-    /* Font */
-    color: $black;
-}
-
-.footer a:hover {
-    /* Font */
-    text-decoration: none;
-    /* Border */
-    border-bottom: 1px solid $black;
+.modal-content {
+  background: rgba(245, 247, 250, 0.8);
+  /* Font */
+  color: $gray-900;
+  /* Border */
+  border-width: 0;
 }
 
 /*
- * Scrollbar
- */
+  * Scrollbar
+  */
 ::-webkit-scrollbar-track {
-    border-radius: 2px;
-    background-color: transparent;
-    /* $gray-200 */
+  border-radius: 2px;
+  background-color: transparent;
+  /* $gray-200 */
 }
-  
+
 ::-webkit-scrollbar {
-    width: 5px;
+  width: 5px;
 }
-  
+
 ::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background-color: rgba(101, 109, 120, 0.3);
+  border-radius: 10px;
+  background-color: rgba(101, 109, 120, 0.3);
 }
 
 /* A font by Jos Buivenga (exljbris) -> www.exljbris.com */
 @font-face {
-    font-family: Diavlo;
-    src: url('assets/webfonts/diavlo/Diavlo_BOOK_II_37.otf');
+  font-family: Diavlo;
+  src: url("assets/webfonts/diavlo/Diavlo_BOOK_II_37.otf");
 }
 
 .diavlo {
-    font-family: Diavlo, sans-serif;
+  font-family: Diavlo, sans-serif;
 }
 
 .merriweather {
-    /* Font */
-    font-family: 'Merriweather', serif;
+  /* Font */
+  font-family: "Merriweather", serif;
 }
 
 .monaco {
-    /* Font */
-    font-family: 'Monaco', courier, monospace;
+  /* Font */
+  font-family: "Monaco", courier, monospace;
 }

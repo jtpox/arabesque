@@ -1,61 +1,61 @@
 <template>
-  <div class="col-md-2 main-nav">
+  <div class="sidebar">
     <div class="logo">
       <div class="d-md-none d-lg-none d-xl-none">
         <span class="float-left diavlo">ribbon</span>
         <span class="float-right">
-          <a v-b-toggle="'main-nav'"><i class="fas fa-bars"/></a>
+          <a v-b-toggle="'main-nav'"><font-awesome-icon icon="bars" /></a>
         </span>
       </div>
       <h1 class="d-none d-md-block diavlo"><router-link :to="{ name: 'Info' }">ribbon</router-link></h1>
     </div>
-    <b-collapse 
-      id="main-nav" 
+    <b-collapse
+      id="main-nav"
       class="vert-nav">
       <b-btn 
         v-b-toggle="'profile-nav'" 
-        class="profile-heading">{{ currentUser.username }}</b-btn>
+        class="profile-heading"><font-awesome-icon icon="user" /> {{ currentUser.username }}</b-btn>
       <b-collapse id="profile-nav">
         <ul>
           <li><router-link 
             :to="{ name: 'About' }" 
-            active-class="current"><span class="badge badge-light"><i class="far fa-address-card"/></span> About Me</router-link></li>
+            active-class="current"><font-awesome-icon icon="address-card" /> About Me</router-link></li>
           <li><router-link 
             :to="{ name: 'Avatar' }" 
-            active-class="current"><span class="badge badge-light"><i class="far fa-user-circle"/></span> Avatar</router-link></li>
+            active-class="current"><font-awesome-icon icon="user-circle" /> Avatar</router-link></li>
           <li><router-link 
             :to="{ name: 'Password' }" 
-            active-class="current"><span class="badge badge-light"><i class="fas fa-key"/></span> Password</router-link></li>
-          <li @click.prevent="logOut()"><a href=""><span class="badge badge-light"><i class="fas fa-sign-out-alt"/></span> Log Out</a></li>
+            active-class="current"><font-awesome-icon icon="key" /> Password</router-link></li>
+          <li @click.prevent="logOut()"><a href=""><font-awesome-icon icon="sign-out-alt" /> Log Out</a></li>
         </ul>
       </b-collapse>
       <div class="heading">Blog</div>
       <ul>
         <li><router-link 
           :to="{ name: 'Posts' }" 
-          active-class="current"><span class="badge badge-light"><i class="far fa-list-alt"/></span> Posts</router-link></li>
+          active-class="current"><font-awesome-icon icon="list-alt" /> Posts</router-link></li>
         <li><router-link 
           :to="{ name: 'NewPost' }" 
-          active-class="current"><span class="badge badge-light"><i class="fas fa-pencil-alt"/></span> New Post</router-link></li>
+          active-class="current"><font-awesome-icon icon="pencil-alt" /> New Post</router-link></li>
       </ul>
 
       <div class="heading">Content</div>
       <ul>
         <li><router-link 
           :to="{ name: 'Users' }" 
-          active-class="current"><span class="badge badge-light"><i class="fas fa-users"/></span> Users</router-link></li>
+          active-class="current"><font-awesome-icon icon="users" /> Users</router-link></li>
         <li><router-link 
           :to="{ name: 'Tags' }" 
-          active-class="current"><span class="badge badge-light"><i class="fas fa-tags"/></span> Tags</router-link></li>
+          active-class="current"><font-awesome-icon icon="tags" /> Tags</router-link></li>
         <li><router-link 
           :to="{ name: 'Pages' }" 
-          active-class="current"><span class="badge badge-light"><i class="fas fa-book"/></span> Pages</router-link></li>
+          active-class="current"><font-awesome-icon icon="book" /> Pages</router-link></li>
         <li><router-link 
           :to="{ name: 'Navigation' }" 
-          active-class="current"><span class="badge badge-light"><i class="fas fa-link"/></span> Navigation</router-link></li>
+          active-class="current"><font-awesome-icon icon="link" /> Navigation</router-link></li>
         <li><router-link 
           :to="{ name: 'Images' }" 
-          active-class="current"><span class="badge badge-light"><i class="far fa-images"/></span> Images</router-link></li>
+          active-class="current"><font-awesome-icon icon="images" /> Images</router-link></li>
       </ul>
     </b-collapse>
   </div>

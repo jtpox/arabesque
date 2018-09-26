@@ -1,7 +1,7 @@
 <template>
-  <div class="row no-gutters wrapper">
+  <div class="wrapper">
     <Navigation/>
-    <div class="col-md-10 main-content">
+    <div class="main-content">
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-9">
@@ -27,7 +27,7 @@
                 class="list-group-item" 
                 @click.prevent="editLink(index)">
                 <div class="justify-content-between">
-                  <h5><span class="badge badge-danger movable"><i class="fas fa-arrows-alt-v"/></span> {{ link.title }}</h5>
+                  <h5><span class="badge badge-danger movable"><font-awesome-icon icon="arrows-alt-v" /></span> {{ link.title }}</h5>
                   <small v-if="link.link !== undefined">Link: {{ link.link }}</small>
                   <small v-if="link.page !== undefined">Page: {{ translatePage(link.page).title }}</small>
                 </div>

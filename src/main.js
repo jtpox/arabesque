@@ -8,6 +8,11 @@ import VueSimplemde from "vue-simplemde";
 import VueChartkick from "vue-chartkick";
 import Chart from "chart.js";
 
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fas } from "@fortawesome/free-solid-svg-icons";
+// import { far } from "@fortawesome/free-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+
 import { version } from "../package.json";
 
 import App from "./App";
@@ -22,6 +27,10 @@ console.log(
   "color: #f5f7fa;background-color:#6a50a7;padding:3px;border-top-left-radius:4px;border-bottom-left-radius:4px;",
   "color:#f5f7fa;background-color:#323133;padding:3px;border-top-right-radius:4px;border-bottom-right-radius:4px;"
 );
+
+// library.add(fas, far);
+library.add(fas);
+Vue.component("font-awesome-icon", FontAwesomeIcon);
 
 Vue.config.productionTip = false;
 

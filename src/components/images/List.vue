@@ -1,7 +1,7 @@
 <template>
-  <div class="row no-gutters wrapper">
+  <div class="wrapper">
     <Navigation/>
-    <div class="col-md-10 main-content">
+    <div class="main-content">
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-9">
@@ -39,7 +39,7 @@
                     <td><button 
                       type="button" 
                       class="btn btn-danger btn-sm" 
-                      @click.prevent="delete_image(index)"><i class="far fa-trash-alt"/></button></td>
+                      @click.prevent="delete_image(index)"><font-awesome-icon icon="trash" /></button></td>
                   </tr>
                 </tbody>
               </table>

@@ -1,7 +1,7 @@
 <template>
-  <div class="row no-gutters wrapper">
+  <div class="wrapper">
     <Navigation/>
-    <div class="col-md-10 main-content">
+    <div class="main-content">
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-10">
@@ -18,16 +18,12 @@
               <shinpuru v-model="page.content"/>
             </div>
 
-            <nav class="navbar navbar-expand-lg navbar-light bg-light page-toolbar">
-              <div class="container-fluid">
-                <span>
-                  <button 
-                    type="button" 
-                    class="btn btn-default" 
-                    @click.prevent="addBox()">Add Content Box</button>
-                </span>
-              </div>
-            </nav>
+            <div class="page-toolbar">
+              <button 
+                type="button" 
+                class="btn btn-default" 
+                @click.prevent="addBox()">Add Content Box</button>
+            </div>
 
             <draggable 
               v-model="page.boxes" 
@@ -41,7 +37,7 @@
                   <div class="card-body">
                     <div class="input-group mb-3">
                       <div class="input-group-prepend movable">
-                        <span class="input-group-text"><i class="fas fa-arrows-alt"/></span>
+                        <span class="input-group-text"><font-awesome-icon icon="arrows-alt" /></span>
                       </div>
                       <input 
                         v-model="box.title" 
@@ -52,7 +48,7 @@
                         <button 
                           type="button" 
                           class="btn btn-danger" 
-                          @click.prevent="removeBox(index)"><i class="far fa-trash-alt"/></button>
+                          @click.prevent="removeBox(index)"><font-awesome-icon icon="trash" /></button>
                       </div>
                     </div>
 
@@ -119,10 +115,7 @@
                 <button 
                   type="button" 
                   class="btn btn-primary btn-block" 
-                  @click.prevent="page.hidden = !page.hidden">
-                  <i 
-                    :class="{ 'fa-eye': !page.hidden, 'fa-eye-slash': page.hidden }" 
-                    class="fas"/> Page {{ (page.hidden) ? 'Hidden' : 'Viewable' }}
+                  @click.prevent="page.hidden = !page.hidden">{{ (page.hidden) ? 'Hidden' : 'Viewable' }}
                 </button>
               </div>
             </div>

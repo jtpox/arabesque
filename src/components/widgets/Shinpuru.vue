@@ -10,7 +10,7 @@
               v-b-tooltip.hover 
               href="#" 
               title="Toggle Preview" 
-              @click.prevent="togglePreview"><i class="fas fa-eye"/></a>
+              @click.prevent="togglePreview"><font-awesome-icon icon="eye" /></a>
           </li>
           <li 
             v-for="(data, key) in markdown" 
@@ -19,8 +19,9 @@
               v-b-tooltip.hover 
               :title="data.name" 
               href="#" 
-              @click.prevent="modifyText(key)" 
-              v-html="data.icon"/>
+              @click.prevent="modifyText(key)">
+              <font-awesome-icon :icon="['fas', data.icon]" />
+            </a>
           </li>
         </ul>
       </b-col>
@@ -30,7 +31,7 @@
           v-show="visible.input" 
           id="shinpuru-input" 
           :value="value" 
-          class="shinpuru-input" 
+          class="form-control shinpuru-input" 
           placeholder="Write your story here." 
           @input="change($event.target)" 
           @focus="updateHeight($event.target)"/>
@@ -66,28 +67,28 @@ export default {
       markdown: {
         bold: {
           name: "Bold",
-          icon: '<i class="fas fa-bold"></i>',
+          icon: "bold",
           template: "__{SELTEXT}__"
         },
         italic: {
           name: "Italic",
-          icon: '<i class="fas fa-italic"></i>',
+          icon: "italic",
           template: "*{SELTEXT}*"
         },
         strikethrough: {
           name: "Strikethrough",
-          icon: '<i class="fas fa-strikethrough"></i>',
+          icon: "strikethrough",
           template: "~~{SELTEXT}~~"
         },
 
         link: {
           name: "Link",
-          icon: '<i class="fas fa-link"></i>',
+          icon: "link",
           template: "[{SELTEXT}](http://)"
         },
         image: {
           name: "Image",
-          icon: '<i class="fas fa-image"></i>',
+          icon: "image",
           template: "![{SELTEXT}](http://)"
         }
       }
@@ -194,16 +195,12 @@ export default {
   min-height: 300px;
   resize: none;
   overflow: hidden;
-  /* Margin & Padding */
-  padding: 10px;
-  /* Border */
-  border: 1px solid #e6e9ed;
-  /* Border Radius */
-  border-radius: 6px;
 }
 
 .shinpuru-display {
   background-color: #f5f4fa;
+  /* Font */
+  color: #3c3b3d;
 }
 
 .shinpuru-container {
@@ -221,7 +218,9 @@ export default {
 
 .shinpuru-tools {
   list-style: none;
-  /* Text */
+  background: rgba(245, 247, 250, 0.2);
+  /* Font */
+  color: #f5f7fa;
   text-align: center;
   /* Margin & Padding */
   margin: 0;
@@ -230,10 +229,6 @@ export default {
   position: sticky;
   top: 10px;
   left: 10px;
-  /* Border */
-  border: 1px solid #e6e9ed;
-  /* Border Radius */
-  border-radius: 6px;
 }
 .shinpuru-tools > li {
   /* Margin * Padding */
@@ -251,12 +246,12 @@ export default {
 .shinpuru-tools > li > a {
   display: block;
   /* FOnt */
-  color: #434a54;
+  color: #f5f7fa;
   /* Margin & Padding */
   padding: 10px;
 }
 
 .shinpuru-tools > li > a:hover {
-  background-color: #e6e9ed;
+  background: rgba(245, 247, 250, 0.2);
 }
 </style>
