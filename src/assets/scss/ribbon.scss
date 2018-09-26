@@ -54,26 +54,13 @@ body {
 @media only screen and (min-width: 768px) {
   .wrapper {
     /* Display */
-    display: -ms-flexbox;
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-box;
-    display: box;
-    /* Flex */
-    -ms-flex-direction: row;
-    -webkit-box-orient: horizontal;
-    -moz-box-orient: horizontal;
-    -ms-box-orient: horizontal;
-    box-orient: horizontal;
+    display: flex;
+    flex-direction: row;
   }
 
   .sidebar {
     /* Flex */
-    -ms-flex: 0 220px;
-    -webkit-box-flex: 0;
-    -moz-box-flex: 0;
-    -ms-box-flex: 0;
-    box-flex: 0;
+    flex-shrink: 0;
   }
 
   .vert-nav {
@@ -82,11 +69,8 @@ body {
 
   .main-content {
     /* Flex */
-    -ms-flex: 1;
-    -webkit-box-flex: 1;
-    -moz-box-flex: 1;
-    -ms-box-flex: 1;
-    box-flex: 1;
+    display: flex;
+    flex-direction: column;
   }
 }
 
@@ -106,6 +90,7 @@ body {
 
 .main-content {
   max-height: 100%;
+  width: 100%;
   overflow-y: scroll;
   /* Margin & Padding */
   padding-top: 20px;
