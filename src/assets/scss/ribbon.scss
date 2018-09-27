@@ -8,6 +8,12 @@
 
 @import url("https://fonts.googleapis.com/css?family=Merriweather:300,400,700|Raleway:300,400");
 
+@mixin defaultBackground() {
+  background: rgba(245, 247, 250, 0.2);
+  /* Box Shadow */
+  box-shadow: inset 0 0 4px rgba(245, 247, 250, 0.2);
+}
+
 html,
 body {
   height: 100%;
@@ -61,6 +67,8 @@ body {
   .sidebar {
     /* Flex */
     flex-shrink: 0;
+    /* Box Shadow */
+    box-shadow: inset 4px 0 5px -2px rgba(60, 59, 61, 0.1);
   }
 
   .vert-nav {
@@ -167,7 +175,7 @@ body {
  * Inputs
  */
 .form-control {
-  background: rgba(245, 247, 250, 0.2);
+  @include defaultBackground;
   /* Font */
   color: $white;
   /* Border */
@@ -178,13 +186,11 @@ body {
 
 .form-control:active,
 .form-control:focus {
-  background: rgba(245, 247, 250, 0.2);
+  @include defaultBackground;
   /* Font */
   color: $white;
   /* Border */
   border-color: #6a50a7;
-  /* Shadow */
-  box-shadow: none;
 }
 
 .form-control::placeholder {
@@ -207,7 +213,7 @@ body {
  * List Group
  */
 .list-group {
-  background: rgba(245, 247, 250, 0.2);
+  @include defaultBackground;
 }
 
 .list-group .list-group-item {
@@ -220,7 +226,7 @@ body {
  * Card
  */
 .card {
-  background: rgba(245, 247, 250, 0.2);
+  @include defaultBackground;
   /* Border */
   border-width: 0;
   /* Margin & Padding */
@@ -233,6 +239,8 @@ body {
 .btn {
   /* Border */
   border-width: 0;
+  /* Box Shadow */
+  box-shadow: 0 0 2px rgba(245, 247, 250, 0.1);
 }
 
 .btn-primary {
@@ -273,10 +281,47 @@ body {
  * Navbar
  */
 .page-toolbar {
-  background: rgba(245, 247, 250, 0.2);
+  @include defaultBackground;
   /* Margin & Padding */
   padding: 10px;
   margin-bottom: 20px;
+}
+
+/*
+ * Alerts
+ */
+.alert {
+  /* Font */
+  color: $white;
+  /* Border */
+  border-width: 0;
+}
+
+.alert-success {
+  background:rgba(140, 193, 82, 0.5);
+}
+
+.alert-info {
+  background: rgba(55, 188, 155, 0.5);
+}
+
+.alert-warning {
+  background: rgba(247, 187, 66, 0.5);
+}
+
+.alert-danger {
+  background: rgba(218, 68, 83, 0.5);
+}
+
+/*
+ * Table
+ */
+.table {
+  @include defaultBackground;
+}
+
+.table.table-hover tr:hover {
+  background: rgba(245, 247, 250, 0.2);
 }
 
 /*

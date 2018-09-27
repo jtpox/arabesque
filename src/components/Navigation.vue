@@ -7,6 +7,7 @@
           <a v-b-toggle="'main-nav'"><font-awesome-icon icon="bars" /></a>
         </span>
       </div>
+      <span class="d-none d-md-block">arabesque for</span>
       <h1 class="d-none d-md-block diavlo"><router-link :to="{ name: 'Info' }">ribbon</router-link></h1>
     </div>
     <b-collapse

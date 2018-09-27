@@ -53,7 +53,7 @@
                 <div class="form-group">
                   <div 
                     v-show="alerts.new.success" 
-                    class="alert alert-success text-center"><i class="far fa-thumbs-up"/></div>
+                    class="alert alert-success text-center"><font-awesome-icon icon="thumbs-up" /></div>
                   <div 
                     v-show="alerts.new.error" 
                     class="alert alert-danger text-center">Error uploading image.</div>

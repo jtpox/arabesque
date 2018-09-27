@@ -142,35 +142,6 @@
       </div>
     </div>
     <ImagesWidget/>
-    <b-modal 
-      ref="statModal" 
-      title="Statistics" 
-      size="lg" 
-      hide-footer>
-      <div class="d-block">
-        <h5>Visitors</h5>
-        <line-chart 
-          :data="statDate" 
-          :empty="{ empty: 'No data available.' }"/>
-      </div>
-      <b-container fluid>
-        <b-row>
-          <b-col cols="6">
-            <h5>Browsers</h5>
-            <pie-chart 
-              :data="statBrowser" 
-              :empty="{ empty: 'No data available.' }"/>
-          </b-col>
-                    
-          <b-col cols="6">
-            <h5>Platforms</h5>
-            <pie-chart 
-              :data="statOs" 
-              :empty="{ empty: 'No data available.' }"/>
-          </b-col>
-        </b-row>
-      </b-container>
-    </b-modal>
   </div>
 </template>
 

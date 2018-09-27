@@ -22,7 +22,7 @@
           <div class="col-md-2">
             <div 
               v-show="success" 
-              class="alert alert-success text-center"><i class="far fa-thumbs-up"/></div>
+              class="alert alert-success text-center"><font-awesome-icon icon="thumbs-up" /></div>
             <div 
               v-show="error" 
               class="alert alert-danger text-center">Error updating.</div>

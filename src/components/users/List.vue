@@ -33,7 +33,7 @@
                 <form @submit.prevent="edit_user()">
                   <div 
                     v-show="alerts.edit.success" 
-                    class="alert alert-success text-center"><i class="far fa-thumbs-up"/></div>
+                    class="alert alert-success text-center"><font-awesome-icon icon="thumbs-up" /></div>
                   <div 
                     v-show="alerts.edit.error" 
                     class="alert alert-danger text-center">Error updating user.</div>
@@ -77,7 +77,7 @@
                 <form @submit.prevent="create_user()">
                   <div 
                     v-show="alerts.new.success" 
-                    class="alert alert-success text-center"><i class="far fa-thumbs-up"/></div>
+                    class="alert alert-success text-center"><font-awesome-icon icon="thumbs-up" /></div>
                   <div 
                     v-show="alerts.new.error" 
                     class="alert alert-danger text-center">Error creating user.</div>
