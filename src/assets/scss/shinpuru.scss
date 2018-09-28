@@ -1,0 +1,83 @@
+@import "functions";
+@import "variables";
+
+.shinpuru-container {
+  width: 100%;
+  height: auto;
+  overflow: none;
+  position: relative;
+  /* Display */
+  display: flex;
+  flex-direction: row;
+}
+
+.shinpuru-container .tools-container {
+  width: 40px;
+  /* Flex */
+  flex-shrink: 0;
+  align-self: flex-start;
+  /* Margin & Padding */
+  margin-right: 20px;
+  /* Position */
+  position: sticky;
+  top: 10px;
+}
+
+.shinpuru-container .input-container {
+  width: 100%;
+  overflow: auto;
+  /* Flex */
+  display: flex;
+  flex-direction: column;
+}
+
+.shinpuru-tools {
+  list-style: none;
+  background: rgba(245, 247, 250, 0.2);
+  /* Font */
+  color: #f5f7fa;
+  text-align: center;
+  /* Margin & Padding */
+  margin: 0;
+  padding: 0;
+}
+
+.shinpuru-tools > li {
+  /* Margin * Padding */
+  margin: 0;
+  padding: 0;
+  /* Border */
+  border-top: 1px solid #e6e9ed;
+}
+
+.shinpuru-tools > li:first-child {
+  /* Border */
+  border-top: none;
+}
+
+.shinpuru-tools > li > a {
+  display: block;
+  /* FOnt */
+  color: #f5f7fa;
+  /* Margin & Padding */
+  padding: 10px;
+}
+
+.shinpuru-tools > li > a:hover {
+  background: rgba(245, 247, 250, 0.2);
+}
+
+.shinpuru-input {
+  /* Font */
+  font-family: "Merriweather", serif;
+}
+
+.shinpuru-display {
+  background: $white;
+  /* Font */
+  color: $gray-900;
+  /* Margin & Padding */
+  padding: 10px;
+  /* Border Radius */
+  border-radius: $border-radius;
+}

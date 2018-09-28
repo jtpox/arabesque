@@ -27,9 +27,8 @@
                 <div class="justify-content-between">
                   <h5 class="mb-1">{{ page.title }}</h5>
                 </div>
-                <small>Status: <i 
-                  :class="{ 'fa-eye': !page.hidden, 'fa-eye-slash': page.hidden }" 
-                  class="fas"/></small>
+                <small>Status:
+                <font-awesome-icon :icon="(page.hidden)? 'eye-slash' : 'eye'" /></small>
               </router-link>
             </div>
 

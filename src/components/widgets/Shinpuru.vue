@@ -1,52 +1,51 @@
 <template>
-  <b-container 
-    fluid 
+  <div
     class="shinpuru-container">
-    <b-row>
-      <b-col>
-        <ul class="shinpuru-tools">
-          <li>
-            <a 
-              v-b-tooltip.hover 
-              href="#" 
-              title="Toggle Preview" 
-              @click.prevent="togglePreview"><font-awesome-icon icon="eye" /></a>
-          </li>
-          <li 
-            v-for="(data, key) in markdown" 
-            :key="key">
-            <a 
-              v-b-tooltip.hover 
-              :title="data.name" 
-              href="#" 
-              @click.prevent="modifyText(key)">
-              <font-awesome-icon :icon="['fas', data.icon]" />
-            </a>
-          </li>
-        </ul>
-      </b-col>
+    <div
+      class="tools-container">
+      <ul class="shinpuru-tools">
+        <li>
+          <a 
+            v-b-tooltip.hover 
+            href="#" 
+            title="Toggle Preview" 
+            @click.prevent="togglePreview"><font-awesome-icon icon="eye" /></a>
+        </li>
+        <li 
+          v-for="(data, key) in markdown" 
+          :key="key">
+          <a 
+            v-b-tooltip.hover 
+            :title="data.name" 
+            href="#" 
+            @click.prevent="modifyText(key)">
+            <font-awesome-icon :icon="['fas', data.icon]" />
+          </a>
+        </li>
+      </ul>
+    </div>
 
-      <b-col md="11">
-        <textarea 
-          v-show="visible.input" 
-          id="shinpuru-input" 
-          :value="value" 
-          class="form-control shinpuru-input" 
-          placeholder="Write your story here." 
-          @input="change($event.target)" 
-          @focus="updateHeight($event.target)"/>
-        <div 
-          v-show="visible.display" 
-          class="shinpuru-display" 
-          v-html="marked"/>
-        <div class="text-right">
-          <p>
-            <small>Words: {{ wordCount }}</small>
-          </p>
-        </div>
-      </b-col>
-    </b-row>
-  </b-container>
+    <div
+      class="input-container">
+      <textarea 
+        v-show="visible.input" 
+        id="shinpuru-input" 
+        :value="value" 
+        class="form-control shinpuru-input" 
+        placeholder="Write your story here." 
+        @input="change($event.target)" 
+        @focus="updateHeight($event.target)"/>
+      <div 
+        v-show="visible.display" 
+        class="shinpuru-display" 
+        v-html="marked"/>
+      <div class="text-right">
+        <p>
+          <small>Words: {{ wordCount }}</small>
+        </p>
+      </div>
+    </div>
+  </div>
 </template>
 <script>
 import Showdown from "showdown";
@@ -185,73 +184,6 @@ export default {
   }
 };
 </script>
-<style>
-.shinpuru-input,
-.shinpuru-display {
-  width: 100%;
-  height: auto;
-}
-.shinpuru-input {
-  min-height: 300px;
-  resize: none;
-  overflow: hidden;
-}
-
-.shinpuru-display {
-  background-color: #f5f4fa;
-  /* Font */
-  color: #3c3b3d;
-}
-
-.shinpuru-container {
-  width: 100%;
-  height: auto;
-  min-height: 100%;
-  max-height: 100%;
-  /* Margin & Padding */
-  padding: 0;
-  /* Font */
-  font-family: "Merriweather", serif;
-  /* Position */
-  position: relative;
-}
-
-.shinpuru-tools {
-  list-style: none;
-  background: rgba(245, 247, 250, 0.2);
-  /* Font */
-  color: #f5f7fa;
-  text-align: center;
-  /* Margin & Padding */
-  margin: 0;
-  padding: 0;
-  /* Position */
-  position: sticky;
-  top: 10px;
-  left: 10px;
-}
-.shinpuru-tools > li {
-  /* Margin * Padding */
-  margin: 0;
-  padding: 0;
-  /* Border */
-  border-top: 1px solid #e6e9ed;
-}
-
-.shinpuru-tools > li:first-child {
-  /* Border */
-  border-top: none;
-}
-
-.shinpuru-tools > li > a {
-  display: block;
-  /* FOnt */
-  color: #f5f7fa;
-  /* Margin & Padding */
-  padding: 10px;
-}
-
-.shinpuru-tools > li > a:hover {
-  background: rgba(245, 247, 250, 0.2);
-}
+<style lang="scss">
+@import "../../assets/scss/shinpuru";
 </style>

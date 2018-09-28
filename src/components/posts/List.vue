@@ -51,7 +51,7 @@
                 <div class="justify-content-between">
                   <h5 class="mb-1">{{ post.title }}</h5>
                 </div>
-                <small>By {{ post.created_by.username }} - {{ post.created_at | formatDate }}</small>
+                <small><font-awesome-icon :icon="(post.hidden)? 'eye-slash' : 'eye'" /> By {{ post.created_by.username }} - {{ post.created_at | formatDate }}</small>
               </router-link>
 
               <router-link
@@ -63,7 +63,7 @@
                 <div class="justify-content-between">
                   <h5 class="mb-1">{{ post.title }}</h5>
                 </div>
-                <small>By {{ post.created_by.username }} - {{ post.created_at | formatDate }}</small>
+                <small><font-awesome-icon :icon="(post.hidden)? 'eye-slash' : 'eye'" /> By {{ post.created_by.username }} - {{ post.created_at | formatDate }}</small>
               </router-link>
             </div>
 
