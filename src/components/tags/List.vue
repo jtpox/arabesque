@@ -33,6 +33,39 @@
 
           <div class="col-md-3">
             <div 
+              v-show="alerts.new.success" 
+              class="alert alert-success text-center"><font-awesome-icon icon="thumbs-up" /></div>
+            <div 
+              v-show="alerts.new.error" 
+              class="alert alert-danger text-center">Error creating tag.</div>
+
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">New Tag</h4>
+                <form @submit.prevent="create_tag()">
+                  <div class="form-group">
+                    <input 
+                      v-model="new_tag.title" 
+                      type="text" 
+                      placeholder="Title" 
+                      class="form-control" >
+                  </div>
+                  <div class="form-group">
+                    <textarea 
+                      v-model="new_tag.content" 
+                      placeholder="Description" 
+                      class="form-control"/>
+                  </div>
+                  <div class="form-group">
+                    <button 
+                      type="submit" 
+                      class="btn btn-primary">Create</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <div 
               v-if="selected_tag !== null" 
               class="card">
               <div class="card-body">
@@ -65,38 +98,6 @@
                       type="button" 
                       class="btn btn-danger" 
                       @click.prevent="delete_tag()">Delete</button>
-                  </div>
-                </form>
-              </div>
-            </div>
-
-            <div class="card">
-              <div class="card-body">
-                <h4 class="card-title">New Tag</h4>
-                <form @submit.prevent="create_tag()">
-                  <div 
-                    v-show="alerts.new.success" 
-                    class="alert alert-success text-center"><font-awesome-icon icon="thumbs-up" /></div>
-                  <div 
-                    v-show="alerts.new.error" 
-                    class="alert alert-danger text-center">Error creating user.</div>
-                  <div class="form-group">
-                    <input 
-                      v-model="new_tag.title" 
-                      type="text" 
-                      placeholder="Title" 
-                      class="form-control" >
-                  </div>
-                  <div class="form-group">
-                    <textarea 
-                      v-model="new_tag.content" 
-                      placeholder="Description" 
-                      class="form-control"/>
-                  </div>
-                  <div class="form-group">
-                    <button 
-                      type="submit" 
-                      class="btn btn-primary">Create</button>
                   </div>
                 </form>
               </div>

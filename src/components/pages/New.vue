@@ -101,22 +101,24 @@
               </span>
               <div class="card-body">
                 <h4 class="card-title">Image</h4>
-                <p class="card-text">
+                <div class="form-group card-text">
                   <b-btn 
                     v-b-modal="'imagesWidget'" 
                     class="btn-block">Select Image</b-btn>
-                </p>
+                </div>
               </div>
             </div>
 
             <div class="card">
               <div class="card-body">
                 <h4 class="card-title">Options</h4>
-                <button 
-                  type="button" 
-                  class="btn btn-primary btn-block" 
-                  @click.prevent="page.hidden = !page.hidden">{{ (page.hidden) ? 'Hidden' : 'Viewable' }}
-                </button>
+                <div class="form-group card-text">
+                  <button 
+                    type="button" 
+                    class="btn btn-primary btn-block" 
+                    @click.prevent="page.hidden = !page.hidden">{{ (page.hidden) ? 'Hidden' : 'Viewable' }}
+                  </button>
+                </div>
               </div>
             </div>
           </div>

@@ -47,16 +47,16 @@
           </div>
 
           <div class="col-md-3">
+            <div 
+              v-show="alerts.new.success" 
+              class="alert alert-success text-center"><font-awesome-icon icon="thumbs-up" /></div>
+            <div 
+              v-show="alerts.new.error" 
+              class="alert alert-danger text-center">Error uploading image.</div>
             <div class="card">
               <div class="card-body">
                 <h4 class="card-title">Upload</h4>
                 <div class="form-group">
-                  <div 
-                    v-show="alerts.new.success" 
-                    class="alert alert-success text-center"><font-awesome-icon icon="thumbs-up" /></div>
-                  <div 
-                    v-show="alerts.new.error" 
-                    class="alert alert-danger text-center">Error uploading image.</div>
                   <FilePond
                     ref="file"
                     name="file"

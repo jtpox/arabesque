@@ -94,10 +94,12 @@
             <div class="card">
               <div class="card-body">
                 <h4 class="card-title">URL</h4>
-                <input 
-                  v-model="page.url" 
-                  type="text" 
-                  class="form-control merriweather" >
+                <div class="form-group card-text">
+                  <input 
+                    v-model="page.url" 
+                    type="text" 
+                    class="form-control merriweather" >
+                </div>
               </div>
             </div>
 
@@ -110,25 +112,25 @@
               </span>
               <div class="card-body">
                 <h4 class="card-title">Image</h4>
-                <p class="card-text">
+                <div class="form-group card-text">
                   <b-btn 
                     v-b-modal="'imagesWidget'" 
                     class="btn-block">Select Image</b-btn>
-                </p>
+                </div>
               </div>
             </div>
 
             <div class="card">
               <div class="card-body">
                 <h4 class="card-title">Options</h4>
-                <div class="form-group">
+                <div class="form-group card-text">
                   <button 
                     type="button" 
                     class="btn btn-primary btn-block" 
                     @click.prevent="page.hidden = !page.hidden">{{ (page.hidden) ? 'Hidden' : 'Viewable' }}
                   </button>
                 </div>
-                <div class="form-group">
+                <div class="form-group card-text">
                   <button 
                     type="button" 
                     class="btn btn-danger btn-block" 

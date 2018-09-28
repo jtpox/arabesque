@@ -167,6 +167,8 @@ body {
   text-align: left;
   /* Margin & Padding */
   padding: 10px 25px 10px 25px;
+  /* Box Shadow */
+  box-shadow: none;
   /* Border */
   border: none;
   /* Border Radius */
@@ -209,6 +211,11 @@ body {
 .form-control::-ms-input-placeholder {
   /* Font */
   color: $gray-100;
+}
+
+select.form-control {
+  /* Font */
+  color: $gray-900 !important;
 }
 
 /*

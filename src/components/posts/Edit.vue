@@ -47,19 +47,19 @@
             <div class="card">
               <div class="card-body">
                 <h4 class="card-title">URL</h4>
-                <p class="card-text">
+                <div class="form-group card-text">
                   <input 
                     v-model="url" 
                     type="text" 
                     class="form-control" >
-                </p>
+                </div>
               </div>
             </div>
 
             <div class="card">
               <div class="card-body">
                 <h4 class="card-title">Tag</h4>
-                <p class="card-text">
+                <div class="form-group card-text">
                   <select 
                     v-model="selected_tag" 
                     class="form-control">
@@ -68,21 +68,21 @@
                       :value="tag._id" 
                       :key="tag._id">{{ tag.title }}</option>
                   </select>
-                </p>
+                </div>
               </div>
             </div>
 
             <div class="card">
               <div class="card-body">
                 <h4 class="card-title">Schedule</h4>
-                <p class="card-text">
+                <div class="form-group card-text">
                   <input 
                     v-b-tooltip.focus 
                     v-model="schedule" 
                     :title="'Original Schedule: ' + originalSchedule" 
                     type="date" 
                     class="form-control" >
-                </p>
+                </div>
               </div>
             </div>
 
@@ -106,7 +106,7 @@
             <div class="card">
               <div class="card-body">
                 <h4 class="card-title">Options</h4>
-                <p class="card-text"/><div class="form-group">
+                <div class="form-group card-text">
                   <button 
                     type="button" 
                     class="btn btn-primary btn-block" 
@@ -116,13 +116,12 @@
                       class="fas"/> {{ (hidden) ? 'Hidden' : 'Viewable' }}
                   </button>
                 </div>
-                <div class="form-group">
+                <div class="form-group card-text">
                   <button 
                     type="button" 
                     class="btn btn-danger btn-block" 
                     @click="delete_post()">Delete Post</button>
                 </div>
-                                </p>
               </div>
             </div>
           </div>

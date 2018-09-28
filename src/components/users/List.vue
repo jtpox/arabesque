@@ -26,6 +26,47 @@
 
           <div class="col-md-3">
             <div 
+              v-show="alerts.new.success" 
+              class="alert alert-success text-center"><font-awesome-icon icon="thumbs-up" /></div>
+            <div 
+              v-show="alerts.new.error" 
+              class="alert alert-danger text-center">Error creating user.</div>
+
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">New User</h4>
+                <form @submit.prevent="create_user()">
+                  <div class="form-group">
+                    <input 
+                      v-model="new_user.username" 
+                      type="text" 
+                      placeholder="Username" 
+                      class="form-control" >
+                  </div>
+                  <div class="form-group">
+                    <input 
+                      v-model="new_user.email" 
+                      type="email" 
+                      placeholder="Email" 
+                      class="form-control" >
+                  </div>
+                  <div class="form-group">
+                    <input 
+                      v-model="new_user.password" 
+                      type="password" 
+                      placeholder="Password" 
+                      class="form-control" >
+                  </div>
+                  <div class="form-group">
+                    <button 
+                      type="submit" 
+                      class="btn btn-primary">Create</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <div 
               v-if="selected_user !== null" 
               class="card">
               <div class="card-body">
@@ -66,46 +107,6 @@
                       type="button" 
                       class="btn btn-danger" 
                       @click.prevent="delete_user()">Delete</button>
-                  </div>
-                </form>
-              </div>
-            </div>
-
-            <div class="card">
-              <div class="card-body">
-                <h4 class="card-title">New User</h4>
-                <form @submit.prevent="create_user()">
-                  <div 
-                    v-show="alerts.new.success" 
-                    class="alert alert-success text-center"><font-awesome-icon icon="thumbs-up" /></div>
-                  <div 
-                    v-show="alerts.new.error" 
-                    class="alert alert-danger text-center">Error creating user.</div>
-                  <div class="form-group">
-                    <input 
-                      v-model="new_user.username" 
-                      type="text" 
-                      placeholder="Username" 
-                      class="form-control" >
-                  </div>
-                  <div class="form-group">
-                    <input 
-                      v-model="new_user.email" 
-                      type="email" 
-                      placeholder="Email" 
-                      class="form-control" >
-                  </div>
-                  <div class="form-group">
-                    <input 
-                      v-model="new_user.password" 
-                      type="password" 
-                      placeholder="Password" 
-                      class="form-control" >
-                  </div>
-                  <div class="form-group">
-                    <button 
-                      type="submit" 
-                      class="btn btn-primary">Create</button>
                   </div>
                 </form>
               </div>

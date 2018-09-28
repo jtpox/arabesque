@@ -53,6 +53,54 @@
               </div>
             </div>
 
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">Add Link</h4>
+                <form @submit.prevent="addLink()">
+                  <div class="form-group">
+                    <input 
+                      v-model="add.title" 
+                      type="text" 
+                      class="form-control" 
+                      placeholder="Title" >
+                  </div>
+
+                  <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                      <select 
+                        v-model="add.selection" 
+                        class="form-control">
+                        <option value="1">Link</option>
+                        <option value="2">Page</option>
+                      </select>
+                    </div>
+                    <input 
+                      v-show="add.selection == 1" 
+                      v-model="add.link" 
+                      type="text" 
+                      class="form-control" 
+                      placeholder="URL" >
+
+                    <select 
+                      v-show="add.selection == 2" 
+                      v-model="add.page" 
+                      class="form-control">
+                      <option 
+                        v-for="(page, index) in pages" 
+                        :key="page._id" 
+                        :value="page._id">{{ page.title }}</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <button 
+                      type="submit" 
+                      class="btn btn-primary" >Add</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+
             <div 
               v-show="edit.index !== null" 
               class="card">
@@ -106,54 +154,6 @@
                       type="button" 
                       class="btn btn-danger" 
                       @click.prevent="deleteLink(edit.index)">Delete</button>
-                  </div>
-                </form>
-              </div>
-            </div>
-
-            <div class="card">
-              <div class="card-body">
-                <h4 class="card-title">Add Link</h4>
-                <form @submit.prevent="addLink()">
-                  <div class="form-group">
-                    <input 
-                      v-model="add.title" 
-                      type="text" 
-                      class="form-control" 
-                      placeholder="Title" >
-                  </div>
-
-                  <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                      <select 
-                        v-model="add.selection" 
-                        class="form-control">
-                        <option value="1">Link</option>
-                        <option value="2">Page</option>
-                      </select>
-                    </div>
-                    <input 
-                      v-show="add.selection == 1" 
-                      v-model="add.link" 
-                      type="text" 
-                      class="form-control" 
-                      placeholder="URL" >
-
-                    <select 
-                      v-show="add.selection == 2" 
-                      v-model="add.page" 
-                      class="form-control">
-                      <option 
-                        v-for="(page, index) in pages" 
-                        :key="page._id" 
-                        :value="page._id">{{ page.title }}</option>
-                    </select>
-                  </div>
-
-                  <div class="form-group">
-                    <button 
-                      type="submit" 
-                      class="btn btn-primary" >Add</button>
                   </div>
                 </form>
               </div>
