@@ -6,7 +6,15 @@
         <div class="row">
 
           <div class="col-md-10">
-            <div class="form-group">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <router-link 
+                  v-b-tooltip.hover
+                  v-b-tooltip.html.right
+                  :to="{ name: 'Posts' }"
+                  class="btn btn-danger btn-lg"
+                  title="Back to Posts"><font-awesome-icon icon="chevron-left" /></router-link>
+              </div>
               <input 
                 v-model="title" 
                 type="text" 
