@@ -5,6 +5,7 @@
 @import "functions";
 @import "variables";
 @import "bootstrap";
+@import "animation";
 
 @import url("https://fonts.googleapis.com/css?family=Merriweather:300,400,700|Raleway:300,400");
 
@@ -39,6 +40,10 @@ body {
   background-size: cover;
   /* Font */
   color: $white;
+}
+
+.loader {
+  animation: spin 1.2s infinite linear;
 }
 
 .wrapper {
