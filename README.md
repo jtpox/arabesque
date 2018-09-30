@@ -17,9 +17,6 @@ npm install
 
 
 # build for production with minification
+# not required as a distribution is already given.
 npm run build
-
-
-# build for production and view the bundle analyzer report
-npm run build --report
 ```

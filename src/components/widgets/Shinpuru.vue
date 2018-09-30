@@ -55,7 +55,11 @@ import Turndown from "turndown";
 export default {
   name: "Shinpuru",
   props: {
-    value: String
+    value: {
+      type: String,
+      default: "",
+      required: false
+    }
   },
   data() {
     return {

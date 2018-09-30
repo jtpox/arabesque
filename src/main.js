@@ -4,7 +4,7 @@ import BootstrapVue from "bootstrap-vue";
 import moment from "moment";
 import axios from "axios";
 import VueAxios from "vue-axios";
-import VueSimplemde from "vue-simplemde";
+// import VueSimplemde from "vue-simplemde";
 import VueChartkick from "vue-chartkick";
 import Chart from "chart.js";
 
