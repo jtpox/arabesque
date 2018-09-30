@@ -1,4 +1,4 @@
- ![arabesque for ribbon](https://raw.githubusercontent.com/jtpox/arabesque/master/src/assets/screencap.png)
+ ![arabesque for ribbon](https://raw.githubusercontent.com/jtpox/arabesque/classic/src/assets/screencap.png)
 # arabesque for ribbon
 
 > A back end interface for [ribbon](https://github.com/jtpox/ribbon).
