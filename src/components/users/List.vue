@@ -57,6 +57,19 @@
                       placeholder="Password" 
                       class="form-control" >
                   </div>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">User is</span>
+                    </div>
+                    <button 
+                      v-b-tooltip.hover
+                      type="button" 
+                      class="btn btn-info form-control" 
+                      title="Click to change."
+                      @click.prevent="(new_user.group === 1)? new_user.group = 2: new_user.group = 1">
+                      {{ (new_user.group === 1) ? 'Admin' : 'Editor' }}
+                    </button>
+                  </div>
                   <div class="form-group">
                     <button 
                       type="submit" 
@@ -99,6 +112,19 @@
                       placeholder="Password" 
                       class="form-control" >
                   </div>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">User is</span>
+                    </div>
+                    <button 
+                      v-b-tooltip.hover
+                      type="button" 
+                      class="btn btn-info form-control" 
+                      title="Click to change."
+                      @click.prevent="(selected_user.group === 1)? selected_user.group = 2: selected_user.group = 1">
+                      {{ (selected_user.group === 1) ? 'Admin' : 'Editor' }}
+                    </button>
+                  </div>
                   <div class="form-group">
                     <button 
                       type="submit" 
@@ -134,7 +160,8 @@ export default {
       new_user: {
         username: null,
         password: null,
-        email: null
+        email: null,
+        group: 1
       },
       alerts: {
         edit: {
@@ -193,7 +220,8 @@ export default {
           password: this.selected_user.password
             ? this.selected_user.password
             : null,
-          email: this.selected_user.email
+          email: this.selected_user.email,
+          group: this.selected_user.group
         })
         .then(res => {
           if (res.data.error == 0) {

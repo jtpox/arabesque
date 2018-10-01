@@ -30,8 +30,10 @@
           <li @click.prevent="logOut()"><a href=""><font-awesome-icon icon="sign-out-alt" /> Log Out</a></li>
         </ul>
       </b-collapse>
-      <div class="heading">Blog</div>
-      <ul>
+      <div
+        v-show="currentUser.user_group === 1 || currentUser.user_group === 2"
+        class="heading">Blog</div>
+      <ul v-show="currentUser.user_group === 1 || currentUser.user_group === 2">
         <li><router-link 
           :to="{ name: 'Posts' }" 
           active-class="current"><font-awesome-icon icon="list-alt" /> Posts</router-link></li>
@@ -40,23 +42,31 @@
           active-class="current"><font-awesome-icon icon="pencil-alt" /> New Post</router-link></li>
       </ul>
 
-      <div class="heading">Content</div>
+      <div
+        v-show="currentUser.user_group === 1 || currentUser.user_group === 2"
+        class="heading">Content</div>
       <ul>
+        <li v-show="currentUser.user_group === 1"><router-link 
+          :to="{ name: 'Tags' }" 
+          active-class="current"><font-awesome-icon icon="tags" /> Tags</router-link></li>
+        <li v-show="currentUser.user_group === 1 || currentUser.user_group === 2"><router-link 
+          :to="{ name: 'Pages' }" 
+          active-class="current"><font-awesome-icon icon="book" /> Pages</router-link></li>
+        <li v-show="currentUser.user_group === 1"><router-link 
+          :to="{ name: 'Navigation' }" 
+          active-class="current"><font-awesome-icon icon="link" /> Navigation</router-link></li>
+        <li v-show="currentUser.user_group === 1"><router-link 
+          :to="{ name: 'Images' }" 
+          active-class="current"><font-awesome-icon icon="images" /> Images</router-link></li>
+      </ul>
+
+      <div
+        v-show="currentUser.user_group === 1"
+        class="heading">Admin</div>
+      <ul v-show="currentUser.user_group === 1">
         <li><router-link 
           :to="{ name: 'Users' }" 
           active-class="current"><font-awesome-icon icon="users" /> Users</router-link></li>
-        <li><router-link 
-          :to="{ name: 'Tags' }" 
-          active-class="current"><font-awesome-icon icon="tags" /> Tags</router-link></li>
-        <li><router-link 
-          :to="{ name: 'Pages' }" 
-          active-class="current"><font-awesome-icon icon="book" /> Pages</router-link></li>
-        <li><router-link 
-          :to="{ name: 'Navigation' }" 
-          active-class="current"><font-awesome-icon icon="link" /> Navigation</router-link></li>
-        <li><router-link 
-          :to="{ name: 'Images' }" 
-          active-class="current"><font-awesome-icon icon="images" /> Images</router-link></li>
       </ul>
     </b-collapse>
   </div>

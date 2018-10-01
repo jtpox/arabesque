@@ -1,6 +1,6 @@
 {
-  "name": "vue-admin",
-  "version": "2018.10.1",
+  "name": "arabesque",
+  "version": "2018.10.2",
   "description": "A back end interface for ribbon.",
   "author": "jtPox <me@jtpox.com>",
   "private": true,

@@ -73,7 +73,8 @@ export default {
               session_id: res.data.session_id,
               session_token: res.data.session_token,
               username: res.data.username,
-              user_id: res.data.user_id
+              user_id: res.data.user_id,
+              user_group: res.data.user_group
             };
 
             localStorage.setItem("user", JSON.stringify(session));

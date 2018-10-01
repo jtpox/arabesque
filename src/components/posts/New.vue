@@ -103,10 +103,7 @@
                   <button 
                     type="button" 
                     class="btn btn-primary btn-block" 
-                    @click.prevent="hidden = !hidden">
-                    <i 
-                      :class="{ 'fa-eye': !hidden, 'fa-eye-slash': hidden }" 
-                      class="fas"/> {{ (hidden) ? 'Hidden' : 'Viewable' }}
+                    @click.prevent="hidden = !hidden">{{ (hidden) ? 'Hidden' : 'Viewable' }}
                   </button>
                 </div>
               </div>
