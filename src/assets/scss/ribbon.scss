@@ -234,6 +234,12 @@ select.form-control {
   background: none;
   /* Border */
   border-color: $gray-100;
+  /* Transition */
+  transition: 0.3s linear;
+}
+
+.list-group .list-group-item:hover {
+  @include defaultBackground;
 }
 
 /*
@@ -332,6 +338,11 @@ select.form-control {
  */
 .table {
   @include defaultBackground;
+}
+
+.table.table-hover tr {
+  /* Transition */
+  transition: 0.3s linear;
 }
 
 .table.table-hover tr:hover {
