@@ -201,18 +201,18 @@ export default {
         .get(`${this.api}/blog/${this.$route.params.id}`)
         .then(res => {
           // console.log(res.data)
-          this.title = res.data[0].title;
-          this.content = res.data[0].content;
-          this.selected_tag = res.data[0].tag._id;
+          this.title = res.data.title;
+          this.content = res.data.content;
+          this.selected_tag = res.data.tag._id;
           // this.schedule = new Date(res.data[0].created_at);
-          this.original_schedule = res.data[0].created_at;
-          this.schedule = moment(res.data[0].created_at).format("YYYY-MM-DD");
-          this.hidden = res.data[0].hidden;
-          this.url = res.data[0].url;
+          this.original_schedule = res.data.created_at;
+          this.schedule = moment(res.data.created_at).format("YYYY-MM-DD");
+          this.hidden = res.data.hidden;
+          this.url = res.data.url;
 
           this.$store.commit(
             "selectImage",
-            res.data[0].image ? res.data[0].image : null
+            res.data.image ? res.data.image : null
           );
         })
         .catch(err => {
