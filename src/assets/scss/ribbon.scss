@@ -361,6 +361,43 @@ select.form-control {
 }
 
 /*
+ * Tabs
+ */
+.nav-tabs {
+  background: rgba(60, 59, 61, 0.2);
+  /* Margin & Padding */
+  margin-bottom: 20px;
+  /* Border */
+  border-width: 0;
+}
+
+.nav-tabs .nav-item a.nav-link, 
+.nav-tabs .nav-item a.nav-link:link,
+.nav-tabs .nav-item a.nav-link:visited {
+  /* Font */
+  color: $white;
+  /* Border */
+  border-width: 0;
+  /* Border Radius */
+  border-radius: 0;
+}
+
+.nav-tabs .nav-item a.nav-link:hover {
+  background: rgba(60, 59, 61, 0.2);
+}
+
+.nav-tabs .nav-item a.nav-link.active,
+.nav-tabs .nav-item a.nav-link.active:link,
+.nav-tabs .nav-item a.nav-link.active:visited {
+  /* Font */
+  color: $black;
+}
+
+.nav-tabs .nav-item a.nav-link.active:hover {
+  background: $white;
+}
+
+/*
   * Scrollbar
   */
 ::-webkit-scrollbar-track {
