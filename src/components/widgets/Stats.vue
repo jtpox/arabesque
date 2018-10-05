@@ -27,7 +27,7 @@
           title="Graph"
           active>
           <div class="d-block">
-            <h5>Visitors</h5>
+            <h5>Visitors (Total over {{ days }} days: <strong>{{ statLog.length }}</strong>)</h5>
             <line-chart 
               :data="statDate" 
               :empty="{ empty: 'No data available.' }"/>
@@ -138,7 +138,7 @@ export default {
         .get(`${this.api + url}/log`)
         .then(res => {
           this.statLog = res.data;
-          console.log(res.data);
+          // console.log(res.data);
         })
         .catch(err => {
           console.log(err);
