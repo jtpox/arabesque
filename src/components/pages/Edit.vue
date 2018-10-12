@@ -40,7 +40,7 @@
               <div 
                 v-for="(box, index) in page.boxes" 
                 :key="index" 
-                :class="'col-md-' + box.content_column">
+                :class="'col-md-' + box.content_column + ' offset-md-' + box.content_offset">
                 <div class="card">
                   <div class="card-body">
                     <div class="input-group mb-3">
@@ -68,9 +68,34 @@
                       <small>Markdown is enabled.</small>
                     </div>
 
-                    <div class="form-group">
+                    <div class="input-group mb-3">
+                      <div
+                        v-b-tooltip.hover
+                        class="input-group-prepend"
+                        title="Size">
+                        <span class="input-group-text">
+                          <font-awesome-icon
+                            icon="expand" />
+                        </span>
+                      </div>
                       <input 
                         v-model="box.content_column" 
+                        type="number" 
+                        class="form-control" >
+                    </div>
+
+                    <div class="input-group mb-3">
+                      <div
+                        v-b-tooltip.hover
+                        class="input-group-prepend"
+                        title="Offset">
+                        <span class="input-group-text">
+                          <font-awesome-icon
+                            icon="arrows-alt-h" />
+                        </span>
+                      </div>
+                      <input 
+                        v-model="box.content_offset" 
                         type="number" 
                         class="form-control" >
                     </div>
@@ -224,7 +249,8 @@ export default {
       this.page.boxes.push({
         title: null,
         content: null,
-        content_column: 3
+        content_column: 3,
+        content_offset: 0
       });
     },
     slugify() {
