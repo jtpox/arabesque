@@ -32,11 +32,15 @@
 }
 
 .shinpuru-tools {
+  background: $gray-200;
   list-style: none;
-  background: rgba(245, 247, 250, 0.2);
   /* Font */
-  color: #f5f7fa;
+  color: $gray-800;
   text-align: center;
+  /* Border */
+  border-color: $gray-300;
+  /* Transition */
+  transition: 0.3s linear;
   /* Margin & Padding */
   margin: 0;
   padding: 0;
@@ -58,13 +62,15 @@
 .shinpuru-tools > li > a {
   display: block;
   /* FOnt */
-  color: #f5f7fa;
+  color: $gray-800;
   /* Margin & Padding */
   padding: 10px;
 }
 
 .shinpuru-tools > li > a:hover {
   background: rgba(245, 247, 250, 0.2);
+  /* Font */
+  color: $purple;
 }
 
 .shinpuru-input {

@@ -10,7 +10,8 @@
 @import url("https://fonts.googleapis.com/css?family=Merriweather:300,400,700|Raleway:300,400");
 
 @mixin defaultBackground() {
-  background: rgba(245, 247, 250, 0.2);
+  background: $gray-200;
+  /* background: rgba(50, 49, 51, 0.5); */
   /* Box Shadow */
   box-shadow: inset 0 0 4px rgba(245, 247, 250, 0.2);
 }
@@ -34,12 +35,14 @@ h1, h2, h3, h4, h5 {
 }
 
 body {
-  background: url("assets/pexels-photo-360912_blur.jpg");
+  /*background-color: $gray-100;*/
+  background: $gray-100;
+  /*background: url("assets/pexels-photo-360912_blur.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-size: cover;
+  background-size: cover; */
   /* Font */
-  color: $white;
+  color: $black;
 }
 
 .loader {
@@ -56,8 +59,10 @@ body {
 }
 
 .sidebar {
-  background: rgba(60, 59, 61, 0.2);
+  background: $gray-900;
   width: 220px;
+  /* Font */
+  color: $white;
   /* Margin & Padding */
   padding: 20px 0 20px 0;
 }
@@ -155,7 +160,8 @@ body {
 }
 
 .sidebar .vert-nav .heading {
-  background: rgba(60, 59, 61, 0.5);
+  /* background: rgba(60, 59, 61, 0.5); */
+  background: $black;
   /* Margin & Padding */
   padding: 10px 25px 10px 25px;
 }
@@ -184,38 +190,15 @@ body {
  * Inputs
  */
 .form-control {
-  @include defaultBackground;
-  /* Font */
-  color: $white;
-  /* Border */
-  border-width: 0 0 1px 0;
+  /* @include defaultBackground; */
   /* Transition */
   transition: background 0.3s, border 0.3s;
 }
 
 .form-control:active,
 .form-control:focus {
-  @include defaultBackground;
-  /* Font */
-  color: $white;
   /* Border */
   border-color: #6a50a7;
-}
-
-.form-control::placeholder {
-  opacity: 1;
-  /* Font */
-  color: $gray-100;
-}
-
-.form-control:-ms-input-placeholder {
-  /* Font */
-  color: $gray-100;
-}
-
-.form-control::-ms-input-placeholder {
-  /* Font */
-  color: $gray-100;
 }
 
 select.form-control {
@@ -232,14 +215,20 @@ select.form-control {
 
 .list-group .list-group-item {
   background: none;
+  /* Font */
+  color: $gray-800;
   /* Border */
-  border-color: $gray-100;
+  border-color: $gray-300;
   /* Transition */
   transition: 0.3s linear;
 }
 
 .list-group .list-group-item:hover {
   @include defaultBackground;
+  /* Font */
+  color: $purple;
+  /* Border */
+  border-bottom-color: $purple;
 }
 
 /*
@@ -261,40 +250,6 @@ select.form-control {
   border-width: 0;
   /* Box Shadow */
   box-shadow: 0 0 2px rgba(245, 247, 250, 0.1);
-}
-
-.btn-primary {
-  background: rgba(59, 175, 218, 0.5);
-}
-
-.btn-secondary {
-  background: rgba(128, 128, 128, 0.5);
-}
-
-.btn-success {
-  background:rgba(140, 193, 82, 0.5);
-  /* Font */
-  color: $white;
-}
-
-.btn-info {
-  background: rgba(55, 188, 155, 0.5);
-}
-
-.btn-warning {
-  background: rgba(247, 187, 66, 0.5);
-}
-
-.btn-danger {
-  background: rgba(218, 68, 83, 0.5);
-}
-
-.btn-light {
-  background: rgba(245, 247, 250, 0.5);
-}
-
-.btn-dark {
-  background: rgba(67, 74, 84, 0.5);
 }
 
 /*
